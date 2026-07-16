@@ -1,13 +1,23 @@
 # Commercial License Notes
 
-## 商业授权说明
+**作者：** 匿名  
+**被授权方：** GitHub 所有用户 / 互联网获得该代码的用户  
+**授予项：** 全部权限，但必须遵守 BQ-CNfurry1.0 协议  
 
-本代码库基于 MIT + BQ-CNfurry1.0 协议开源发布，商业使用免费。
+**违反协议的后果：**  
+没有后果。因为我并不能对你造成任何麻烦，这个库也并没有那么火。  
 
-如需正式商业授权文件或对授权范围有疑问，请联系版权持有人。
+只是希望你可以尊重一下社区和圈子。  
+谢谢你。  
 
-## Commercial License
+---
 
-This codebase is open-sourced under MIT + BQ-CNfurry1.0 license. Commercial use is free of charge.
+**Author:** Anonymous  
+**Licensee:** All GitHub users / anyone who obtains this code  
+**Grant:** Full permissions, subject to BQ-CNfurry1.0  
 
-For formal commercial license documents or questions about license scope, please contact the copyright holder.
+**Consequences of violation:**  
+None. I can't cause you any trouble, and this library isn't that popular anyway.  
+
+Just hoping you can respect the community.  
+Thank you.
