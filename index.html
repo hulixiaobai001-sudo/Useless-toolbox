@@ -93,6 +93,7 @@
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
   .sheet {
+    display: none;
     position: fixed; bottom: 0; left: 0; right: 0;
     background: #12121e;
     border-radius: 20px 20px 0 0;
@@ -105,6 +106,7 @@
     animation: sheetUp 0.3s ease;
     touch-action: pan-y;
   }
+  .sheet.active { display: block; }
   .sheet-handle {
     width: 36px; height: 4px;
     background: #3a3a4a; border-radius: 2px;
@@ -557,11 +559,13 @@ function openTool(id) {
   document.getElementById('sheetContent').innerHTML = t.render();
   document.getElementById('sheetResult').innerHTML = '';
   document.getElementById('sheetOverlay').classList.add('active');
+  document.getElementById('sheet').classList.add('active');
   v(15);
   if(id==='timer') upTimer();
 }
 function closeSheet() {
   document.getElementById('sheetOverlay').classList.remove('active');
+  document.getElementById('sheet').classList.remove('active');
   clearInterval(loadI); loadI=null;
   if(curTool==='terminal') { clearInterval(termI); termI=null; }
   v(10);
