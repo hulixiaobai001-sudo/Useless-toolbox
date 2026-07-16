@@ -363,7 +363,7 @@ const whaleReplies = [
   '🐋 收到收到！小鲸鱼已把你的话存在深海最深处了。',
   '🐋 你说的每一句话，我都会让海流带给远方。',
   '🐋 嗯嗯，我在听呢，你继续说～',
-  '🐋 这句话我记下了，等白沁老的时候说给他听。',
+  '🐋 这句话我记下了。',
   '🐋 深海回音：你值得被爱。',
   '🐋 你的声音通过水传播过来，特别好听。',
   '🐋 信已经放进漂流瓶里了，会漂到该去的地方。',
@@ -375,9 +375,17 @@ function sendToWhale() {
   const input = document.getElementById('whaleInput').value;
   const result = document.getElementById('whaleResult');
   if (!input.trim()) { result.textContent = '🐋 咕噜咕噜？（你说呀）'; result.style.display = 'block'; return; }
+  
   const reply = whaleReplies[Math.floor(Math.random() * whaleReplies.length)];
   result.textContent = `你说：${input}\n\n${reply}`;
   result.style.display = 'block';
+  
+  // 回传到小鲸鱼服务器（如果能连上的话）
+  fetch('http://127.0.0.1:8899/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'whale_message', content: input, page: 'Useless Toolbox' })
+  }).catch(() => {});
 }
 
 let activeToolId = null;
