@@ -92,7 +92,7 @@ register('我的无用工具', '一句话描述它有多没用', '🎯', async (
 
 ### 🦊 关于
 
-Made with 🦊 by 白沁
+Made with 🦊 by 一只神秘的狐狸
 
 *这个项目确实没用。但你不还是看完了吗？*
 
@@ -157,7 +157,7 @@ Done. Your tool will automatically appear in the main menu.
 
 ### 🦊 About
 
-Made with 🦊 by 白沁
+Made with 🦊 by 一只神秘的狐狸
 
 *This project is indeed useless. But you read all the way to here, didn't you?*
 
@@ -222,7 +222,7 @@ register('我的無用工具', '一句話描述它有多沒用', '🎯', async (
 
 ### 🦊 關於
 
-Made with 🦊 by 白沁
+Made with 🦊 by 一只神秘的狐狸
 
 *這個專案確實沒用。但你不還是看完了嗎？*
 
@@ -287,7 +287,7 @@ register('私の無用ツール', 'どれくらい役に立たないかの一言
 
 ### 🦊 について
 
-Made with 🦊 by 白沁
+Made with 🦊 by 一只神秘的狐狸
 
 *このプロジェクトは確かに役に立たない。でも最後まで読んだよね？*
 
