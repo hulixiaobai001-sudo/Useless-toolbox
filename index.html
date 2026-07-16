@@ -268,7 +268,17 @@ const tools = [
   { id:'color', icon:'🎨', title:'随机颜色', tag:'',
     render:()=>`<div id="colorBox" style="height:120px;border-radius:12px;background:#1a1a2a;margin-bottom:0.5rem;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;transition:background 0.3s">点我生成</div><button ontouchstart="" onclick="v();genColor()">🎨 生成颜色</button><div id="colorOut" class="result-box" style="display:none"></div>` },
   { id:'whale', icon:'🐋', title:'小鲸鱼信箱', tag:'🐋',
-    render:()=>`<textarea id="whaleIn" rows="2" placeholder="写下你想对小鲸鱼说的话..."></textarea><button ontouchstart="" onclick="v();sendWhale()">发送 🐋</button><div id="whaleOut" class="result-box" style="display:none"></div>` }
+    render:()=>`<textarea id="whaleIn" rows="2" placeholder="写下你想对小鲸鱼说的话..."></textarea><button ontouchstart="" onclick="v();sendWhale()">发送 🐋</button><div id="whaleOut" class="result-box" style="display:none"></div>` },
+  { id:'dart', icon:'🎯', title:'决策飞镖', tag:'new',
+    render:()=>`<p style="color:var(--dim);font-size:0.8rem;text-align:center">让飞镖帮你做决定</p><div style="display:flex;flex-wrap:wrap;gap:0.3rem;margin:0.5rem 0" id="dartOpts"><input id="dartOpt" style="flex:1;min-width:100px" placeholder="选项..."><button ontouchstart="" onclick="v();addDartOpt()" style="width:auto;padding:0.5rem 1rem;flex:0">➕</button></div><div id="dartList" style="display:flex;flex-wrap:wrap;gap:0.3rem;min-height:1.5rem;margin-bottom:0.5rem"></div><button ontouchstart="" onclick="v();throwDart()">🎯 掷飞镖！</button><div id="dartOut" class="result-box" style="display:none"></div>` },
+  { id:'gacha', icon:'🃏', title:'抽卡模拟器', tag:'new',
+    render:()=>`<p style="color:var(--dim);font-size:0.8rem;text-align:center">试试你的运气</p><div id="gachaDisplay" style="font-size:3rem;text-align:center;padding:1rem;background:#0a0a12;border-radius:12px;margin-bottom:0.5rem;border:1px solid var(--border);min-height:80px">🎴</div><div id="gachaRarity" style="text-align:center;font-size:0.8rem;margin-bottom:0.5rem;min-height:1.2rem"></div><button ontouchstart="" onclick="v();pullGacha()">🃏 抽一张</button><button class="btn-sec" ontouchstart="" onclick="v();pullGacha10()">🃏 抽十连</button><div id="gachaOut" class="result-box" style="display:none"></div>` },
+  { id:'crystal', icon:'🔮', title:'水晶球占卜', tag:'new',
+    render:()=>`<div style="text-align:center;padding:1rem"><div id="crystalBall" style="font-size:5rem;margin-bottom:0.5rem;transition:all 0.5s">🔮</div><p style="color:var(--dim);font-size:0.8rem">凝视水晶球，寻找答案</p></div><input id="crystalQ" placeholder="问水晶球一个问题..." style="margin-bottom:0.3rem"><button ontouchstart="" onclick="v();askCrystal()">🔮 占卜</button><div id="crystalOut" class="result-box" style="display:none"></div>` },
+  { id:'luck', icon:'🎪', title:'今日人品', tag:'new',
+    render:()=>`<button ontouchstart="" onclick="v();checkLuck()">🎪 测今日人品</button><div id="luckOut" class="result-box" style="display:none"></div>` },
+  { id:'slacker', icon:'⏱️', title:'摸鱼计时器', tag:'new',
+    render:()=>`<p style="color:var(--dim);font-size:0.8rem;text-align:center">距离下班/放学还有多久</p><div style="display:flex;gap:0.5rem;margin:0.5rem 0"><input id="slackerH" type="number" placeholder="17" style="flex:1;text-align:center"><span style="display:flex;align-items:center;color:var(--dim)">:</span><input id="slackerM" type="number" placeholder="00" style="flex:1;text-align:center"></div><p style="text-align:center;font-size:0.7rem;color:var(--dim)">输入下班时间 (24小时制)</p><button ontouchstart="" onclick="v();startSlacker()">⏱️ 开始摸鱼</button><div id="slackerOut" class="result-box" style="display:none"></div>` }
 ];
 
 // === 音效 (Web Audio) ===
@@ -435,6 +445,105 @@ function sendWhale() {
   r.style.display='block';
   v(40);
   successSound();
+}
+
+// === 决策飞镖 ===
+const dartOpts = [];
+function addDartOpt() {
+  const v = document.getElementById('dartOpt').value.trim();
+  if (!v) return;
+  dartOpts.push(v);
+  document.getElementById('dartOpt').value = '';
+  renderDartList();
+  v(10);
+}
+function renderDartList() {
+  const list = document.getElementById('dartList');
+  list.innerHTML = dartOpts.map((o,i) => `<span style="background:#1a1a2a;padding:0.2rem 0.5rem;border-radius:6px;font-size:0.75rem;display:inline-flex;align-items:center;gap:0.3rem">${o}<span onclick="v();removeDartOpt(${i})" style="cursor:pointer;color:var(--dim)">×</span></span>`).join('');
+}
+function removeDartOpt(i) { dartOpts.splice(i,1); renderDartList(); }
+function throwDart() {
+  if (!dartOpts.length) { document.getElementById('dartOut').textContent = '🎯 先加几个选项呀！'; document.getElementById('dartOut').style.display='block'; return; }
+  v([30,50,80]);
+  let c=0;
+  const iv=setInterval(()=>{document.getElementById('dartOut').textContent='🎯 飞镖旋转中...'; document.getElementById('dartOut').style.display='block'; c++; if(c>8){clearInterval(iv); const r=dartOpts[Math.floor(Math.random()*dartOpts.length)]; document.getElementById('dartOut').textContent=`🎯 飞镖选中了：\n「${r}」`; v(100); successSound();}},100);
+}
+
+// === 抽卡模拟器 ===
+const gachaPool = [
+  {name:'🌟 SSR 小鲸鱼',rate:0.02,color:'#f0a030'},
+  {name:'🌟 SSR 深海之主',rate:0.03,color:'#f0a030'},
+  {name:'⭐ SR 狐狸使者',rate:0.08,color:'#a080d0'},
+  {name:'⭐ SR 月光精灵',rate:0.08,color:'#a080d0'},
+  {name:'⭐ SR 浪花骑士',rate:0.09,color:'#a080d0'},
+  {name:'📖 R 普通路人甲',rate:0.20,color:'#6090d0'},
+  {name:'📖 R 隔壁班同学',rate:0.20,color:'#6090d0'},
+  {name:'📖 R 食堂大妈',rate:0.15,color:'#6090d0'},
+  {name:'📖 R 班主任',rate:0.10,color:'#6090d0'},
+  {name:'🌿 N 一片树叶',rate:0.05,color:'#80a080'}
+];
+function doGacha() {
+  const r = Math.random();
+  let acc=0;
+  for (const item of gachaPool) { acc+=item.rate; if(r<acc) return item; }
+  return gachaPool[gachaPool.length-1];
+}
+function pullGacha() {
+  v([20,30]);
+  let c=0;
+  const iv=setInterval(()=>{document.getElementById('gachaDisplay').textContent=['🎴','🃏','⭐','🌟'][Math.floor(Math.random()*4)]; c++; if(c>8){clearInterval(iv); const r=doGacha(); document.getElementById('gachaDisplay').textContent=r.name[0]; document.getElementById('gachaRarity').innerHTML=`<span style="color:${r.color};font-weight:700">${r.name}</span>`; document.getElementById('gachaOut').textContent=`🎴 你抽到了：${r.name}`; document.getElementById('gachaOut').style.display='block'; v(60); successSound();}},80);
+}
+function pullGacha10() {
+  v([20,20,30,30,50]);
+  const results = [];
+  for(let i=0;i<10;i++) results.push(doGacha());
+  const ssr = results.filter(r=>r.name.startsWith('🌟'));
+  const sr = results.filter(r=>r.name.startsWith('⭐'));
+  document.getElementById('gachaDisplay').textContent = ssr.length ? '🌟' : (sr.length ? '⭐' : '📖');
+  document.getElementById('gachaRarity').innerHTML = ssr.length ? `<span style="color:#f0a030;font-weight:700">${ssr.length}个SSR！</span>` : (sr.length ? `<span style="color:#a080d0;font-weight:700">${sr.length}个SR</span>` : `<span style="color:var(--dim)">保底了...</span>`);
+  document.getElementById('gachaOut').textContent = `🃏 十连结果：\n${results.map(r=>r.name).join('\n')}`;
+  document.getElementById('gachaOut').style.display='block';
+  if(ssr.length) { v([100,50,100,50,200]); setTimeout(()=>successSound(),100); } else v(30);
+}
+
+// === 水晶球 ===
+const crystalA = ['✨ 是的','🔮 毫无疑问','🌟 命运在微笑','🌙 再等等','💫 别急','⭐ 或许吧','🌊 深海说可以','🦊 狐狸点头了','🐋 小鲸鱼说好','☁️ 看不清','🌫️ 再问一次','🍃 随风而去','🌈 答案在路上','💭 你觉得呢'];
+function askCrystal() {
+  const q = document.getElementById('crystalQ').value.trim();
+  if(!q){document.getElementById('crystalOut').textContent='🔮 你还没问问题呢...'; document.getElementById('crystalOut').style.display='block'; return;}
+  const ball = document.getElementById('crystalBall');
+  v([20,30,40,50]);
+  ball.style.transform='rotate(360deg) scale(1.2)';
+  setTimeout(()=>{ball.style.transform=''; const a=crystalA[Math.floor(Math.random()*crystalA.length)]; document.getElementById('crystalOut').textContent=`🔮 水晶球说：「${a}」`; document.getElementById('crystalOut').style.display='block'; v(60); successSound();},600);
+}
+
+// === 今日人品 ===
+function checkLuck() {
+  v([20,30]);
+  const score = Math.floor(Math.random()*100);
+  const stars = score>80?'🌟🌟🌟':(score>60?'🌟🌟':(score>40?'⭐':'💀'));
+  const msgs = score>80?'今天运气爆棚！':'还不错啦～':(score>40?'平平无奇':'建议回家睡觉');
+  let c=0;
+  const iv=setInterval(()=>{document.getElementById('luckOut').textContent=`🎪 人品计算中... ${c*10}%`; document.getElementById('luckOut').style.display='block'; c++; if(c>8){clearInterval(iv); document.getElementById('luckOut').textContent=`🎪 今日人品：${score}分 ${stars}\n${msgs}`; v(60); successSound();}},120);
+}
+
+// === 摸鱼计时器 ===
+let slackerI = null;
+function startSlacker() {
+  const h = parseInt(document.getElementById('slackerH').value) || 17;
+  const m = parseInt(document.getElementById('slackerM').value) || 0;
+  const e = document.getElementById('slackerOut');
+  e.style.display='block';
+  if(slackerI) clearInterval(slackerI);
+  slackerI = setInterval(()=>{
+    const n=new Date();
+    const target = new Date(n); target.setHours(h,m,0,0);
+    if(n>target){target.setDate(target.getDate()+1);}
+    const d=target-n;
+    const hh=Math.floor(d/3600000), mm=Math.floor((d%3600000)/60000), ss=Math.floor((d%60000)/1000);
+    e.textContent = `⏱️ 距离 ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')} 还有\n${hh}小时 ${mm}分 ${ss}秒\n\n${hh<1?'马上就能跑路了！加油！':'再坚持一下...'}`;
+  }, 1000);
+  v(30);
 }
 
 // === Sheet ===
