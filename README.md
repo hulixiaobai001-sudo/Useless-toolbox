@@ -50,6 +50,8 @@
 
 MIT License + [BQ-CNfurry1.0](ADDITIONAL_LICENSE.md)
 
+> 虽然该代码库完全开源并使用 MIT + BQ-CNfurry1.0 协议开源发布，但是您仍需要知道：商业使用权是免费的，但是商业授权请参考 [Commercial License Notes.md](Commercial%20License%20Notes.md) 文件。
+
 </details>
 
 <details>
