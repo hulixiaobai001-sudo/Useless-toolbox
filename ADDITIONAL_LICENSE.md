@@ -1,6 +1,26 @@
 **BQ-CNfurry1.0 Additional License Agreement**
 
-This Additional License Agreement supplements the primary open source license chosen by the user (e.g., MIT, Apache-2.0). In case of any conflict between this agreement and the primary license, the terms of the primary license shall prevail.
+### Preamble
+
+The BQ-CNfurry1.0 Additional License is an informal, community-oriented supplemental license framework. It is not a formal open source license ratified by any official licensing body, nor does it intend to replace existing open source licenses. Rather, it is built upon the foundations of established licenses such as the GNU General Public License v3.0 (GPL-3.0), the MIT License, and similar widely-recognized open source agreements.
+
+**Purpose and Philosophy:**
+
+The primary goal of this agreement is to foster an ideal environment for code sharing and collaboration within the Furry (anthropomorphic) community — a space where creative expression and software development intersect. It seeks to strike a balance between the freedom of open source software and the preservation of community cultural identity.
+
+By providing an additional layer of community-conscious terms, this license aims to:
+
+1. **Promote Visibility** — Encourage the development and sharing of code created by and for the Furry community, making "Furry + Code" more visible and accessible to both community members and the broader open source ecosystem.
+
+2. **Protect Community Values** — Ensure that works derived from or related to the Furry community retain their cultural context and are not used in ways that distort, defame, or erase the community's core identity.
+
+3. **Encourage Ethical Use** — While imposing no punitive measures for non-compliance, this agreement serves as a good-faith request for users to respect the cultural origins of the work and the community from which it emerged.
+
+This license is, at its heart, **a statement of intent rather than a weapon of enforcement**. It exists to invite collaboration, not to restrict it.
+
+---
+
+This Additional License Agreement supplements the primary open source license chosen by the user (e.g., MIT, Apache-2.0, GPL-3.0). In case of any conflict between this agreement and the primary license, the terms of the primary license shall prevail.
 
 ### 1. Grant of Rights
 The Copyright Holder grants a perpetual, worldwide, non-exclusive, royalty-free, irrevocable license to:
