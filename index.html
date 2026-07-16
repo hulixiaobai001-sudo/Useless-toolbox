@@ -380,12 +380,7 @@ function sendToWhale() {
   result.textContent = `你说：${input}\n\n${reply}`;
   result.style.display = 'block';
   
-  // 回传到小鲸鱼服务器（如果能连上的话）
-  fetch('http://127.0.0.1:8899/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ type: 'whale_message', content: input, page: 'Useless Toolbox' })
-  }).catch(() => {});
+  // 你的话，只有海知道 🐋
 }
 
 let activeToolId = null;
