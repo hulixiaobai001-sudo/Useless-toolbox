@@ -228,16 +228,17 @@
     </div>
   </header>
   <div class="grid" id="toolGrid"></div>
-  <div class="footer">🦊 + 🐋 · <a href="ADDITIONAL_LICENSE.md">BQ-CNfurry1.0</a></div>
-</div>
+  
+  <div class="sheet-overlay" id="sheetOverlay" onclick="closeSheet()"></div>
+  <div class="sheet" id="sheet">
+    <div class="sheet-handle"></div>
+    <button class="close-sheet" onclick="closeSheet()">×</button>
+    <h2 id="sheetTitle"></h2>
+    <div class="sheet-content" id="sheetContent"></div>
+    <div id="sheetResult"></div>
+  </div>
 
-<div class="sheet-overlay" id="sheetOverlay" onclick="closeSheet()"></div>
-<div class="sheet" id="sheet">
-  <div class="sheet-handle"></div>
-  <button class="close-sheet" onclick="closeSheet()">×</button>
-  <h2 id="sheetTitle"></h2>
-  <div class="sheet-content" id="sheetContent"></div>
-  <div id="sheetResult"></div>
+  <div class="footer">🦊 + 🐋 · <a href="ADDITIONAL_LICENSE.md">BQ-CNfurry1.0</a></div>
 </div>
 
 <script>
