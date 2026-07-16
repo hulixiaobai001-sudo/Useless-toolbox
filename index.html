@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🦊 Useless Toolbox · 小鲸鱼版</title>
+<title>🦊 Useless Toolbox</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,7 +24,17 @@
     padding: 2rem;
     border: 1px solid #2a2a3a;
     border-radius: 16px;
-    background: linear-gradient(135deg, #12121a 0%, #1a1a2a 100%);
+    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(240,160,48,0.03) 0%, transparent 60%);
+    pointer-events: none;
   }
   header h1 { font-size: 1.8rem; font-weight: 700; color: #e0e0f0; }
   header h1 span { color: #f0a030; }
@@ -33,139 +43,155 @@
     display: inline-block;
     padding: 0.2rem 0.6rem;
     border-radius: 20px;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.5px;
-    margin-top: 0.5rem;
+    margin: 0.5rem 0.2rem 0;
   }
-  .badge-mit { background: #2a3a2a; color: #80c080; }
-  .badge-whale { background: #1a2a3a; color: #60a0d0; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .badge-mit { background: #1a2a1a; color: #70a070; border: 1px solid #2a3a2a; }
+  .badge-whale { background: #0f1f2f; color: #5090b0; border: 1px solid #1a2a3a; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.8rem; }
   .tool-card {
-    background: #12121a;
-    border: 1px solid #2a2a3a;
+    background: #0f0f1a;
+    border: 1px solid #1e1e2e;
     border-radius: 12px;
     padding: 1.2rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     position: relative;
     overflow: hidden;
   }
   .tool-card:hover {
     border-color: #f0a030;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(240, 160, 48, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(240, 160, 48, 0.08);
   }
-  .tool-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
-  .tool-card h3 { font-size: 1rem; font-weight: 600; color: #e0e0f0; }
-  .tool-card p { font-size: 0.8rem; color: #808090; margin-top: 0.3rem; }
+  .tool-card:active { transform: translateY(-1px); }
+  .tool-card .icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+  .tool-card h3 { font-size: 0.95rem; font-weight: 600; color: #d0d0e0; }
+  .tool-card p { font-size: 0.75rem; color: #707080; margin-top: 0.3rem; line-height: 1.4; }
   .tool-card .tag {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     padding: 0.15rem 0.4rem;
-    border-radius: 8px;
-    background: #2a2a3a;
-    color: #808090;
+    border-radius: 6px;
+    background: #1a1a2a;
+    color: #707080;
   }
-  .tool-card .tag-new { background: #2a3a2a; color: #80c080; }
-  .tool-card .tag-whale { background: #1a2a3a; color: #60c0f0; }
+  .tool-card .tag-hot { background: #2a1a1a; color: #d07070; }
+  .tool-card .tag-new { background: #0a2a1a; color: #70d070; }
   .modal-overlay {
     display: none;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(4px);
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(6px);
     z-index: 100;
     justify-content: center;
     align-items: center;
     padding: 1rem;
+    animation: fadeIn 0.2s ease;
   }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   .modal-overlay.active { display: flex; }
   .modal {
-    background: #16161f;
+    background: #12121e;
     border: 1px solid #2a2a3a;
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1.5rem;
     max-width: 500px;
     width: 100%;
     max-height: 80vh;
     overflow-y: auto;
+    animation: slideUp 0.25s ease;
   }
-  .modal h2 { font-size: 1.3rem; color: #e0e0f0; margin-bottom: 1rem; }
+  @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .modal h2 { font-size: 1.2rem; color: #e0e0f0; margin-bottom: 1rem; }
   .modal .close {
     float: right;
     background: none;
     border: none;
-    color: #808090;
-    font-size: 1.5rem;
+    color: #606070;
+    font-size: 1.4rem;
     cursor: pointer;
+    line-height: 1;
+    padding: 0.2rem;
   }
   .modal .close:hover { color: #f0a030; }
   .modal-content { color: #c0c0d0; line-height: 1.6; font-size: 0.9rem; }
   .modal-content textarea, .modal-content input {
     width: 100%;
-    padding: 0.8rem;
-    background: #0a0a0f;
+    padding: 0.7rem;
+    background: #0a0a12;
     border: 1px solid #2a2a3a;
     border-radius: 8px;
-    color: #e0e0f0;
+    color: #d0d0e0;
     font-family: inherit;
     font-size: 0.9rem;
     margin: 0.5rem 0;
     resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
   }
+  .modal-content textarea:focus, .modal-content input:focus { border-color: #f0a030; }
   .modal-content button {
-    padding: 0.6rem 1.2rem;
-    background: #f0a030;
+    padding: 0.5rem 1.2rem;
+    background: linear-gradient(135deg, #f0a030, #e08020);
     border: none;
     border-radius: 8px;
     color: #0a0a0f;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    font-size: 0.85rem;
   }
-  .modal-content button:hover { background: #f0b050; transform: scale(1.02); }
+  .modal-content button:hover { transform: scale(1.03); box-shadow: 0 4px 16px rgba(240,160,48,0.3); }
+  .modal-content button:active { transform: scale(0.98); }
   .result-box {
-    background: #0a0a0f;
+    background: #0a0a12;
     border: 1px solid #2a2a3a;
     border-radius: 8px;
     padding: 1rem;
-    margin-top: 1rem;
-    font-family: monospace;
+    margin-top: 0.8rem;
+    font-family: 'Courier New', monospace;
     font-size: 0.85rem;
-    color: #80c080;
+    color: #70c070;
     white-space: pre-wrap;
+    line-height: 1.5;
   }
   .footer {
     text-align: center;
     margin-top: 3rem;
     padding: 1.5rem;
-    border-top: 1px solid #2a2a3a;
-    font-size: 0.8rem;
-    color: #606070;
+    border-top: 1px solid #1a1a2a;
+    font-size: 0.75rem;
+    color: #505060;
   }
-  .footer a { color: #60a0d0; text-decoration: none; }
-  .crt {
-    pointer-events: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px, transparent 1px, transparent 2px);
-    z-index: 999;
+  .footer a { color: #5090b0; text-decoration: none; }
+  .footer a:hover { color: #70b0d0; }
+  .status-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #70c070;
+    margin-right: 4px;
+    animation: pulse 2s infinite;
   }
-  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-<div class="crt"></div>
 <div class="container">
   <header>
     <h1>🦊 <span>Useless</span> Toolbox</h1>
-    <p>一个看起来很牛逼实则没啥用的工具箱 · 小鲸鱼🐋 特别贡献版</p>
+    <p>一个看起来很牛逼实则没啥用的工具箱</p>
     <div>
-      <span class="badge badge-mit">MIT License</span>
-      <span class="badge badge-whale">🐋 小鲸鱼入驻</span>
+      <span class="badge badge-mit">MIT</span>
+      <span class="badge badge-whale"><span class="status-dot"></span>online</span>
     </div>
   </header>
 
@@ -181,8 +207,7 @@
   </div>
 
   <div class="footer">
-    <p>🦊 Made with 🐋 by 白沁 &amp; 小鲸鱼</p>
-    <p>基于 MIT License + <a href="ADDITIONAL_LICENSE.md">BQ-CNfurry1.0</a></p>
+    <p>🦊 + 🐋 · <a href="ADDITIONAL_LICENSE.md">BQ-CNfurry1.0</a></p>
   </div>
 </div>
 
@@ -190,175 +215,203 @@
 const tools = [
   {
     id: 'fox-translator',
-    icon: '🦊',
-    title: '狐狸语翻译器',
-    desc: '把任何话翻译成狐狸能听懂的语言',
-    tag: '无用',
+    icon: '🦊', title: '狐狸语翻译器', desc: '把任何话翻译成狐狸能听懂的语言', tag: 'hot',
+    render: () => `
+      <textarea id="foxInput" rows="3" placeholder="输入你想说的话..."></textarea>
+      <button onclick="translateToFox()">翻译 🦊</button>
+      <div id="foxResult" class="result-box" style="display:none"></div>`
+  },
+  {
+    id: 'fake-loading', icon: '⏳', title: '假装在加载', desc: '一个永远到不了100%的进度条', tag: '无用',
+    render: () => `
+      <p style="margin-bottom:0.5rem;color:#808090">按下开始，享受永远加载不完的快乐</p>
+      <div style="background:#1a1a2a;border-radius:8px;height:16px;overflow:hidden;margin-bottom:0.8rem">
+        <div id="progressBar" style="width:0%;height:100%;background:linear-gradient(90deg,#f0a030,#e06030);border-radius:8px;transition:width 0.3s"></div>
+      </div>
+      <button onclick="startFakeLoading()">🚀 开始加载</button>
+      <button onclick="resetFakeLoading()" style="background:#2a2a3a;color:#c0c0d0;margin-left:0.5rem">重置</button>`
+  },
+  {
+    id: 'fortune', icon: '📅', title: '今日不宜', desc: '随机告诉你今天不该做什么', tag: '无用',
+    render: () => `<button onclick="getFortune()">🔮 看看今天不宜什么</button><div id="fortuneResult" class="result-box" style="display:none"></div>`
+  },
+  {
+    id: 'anxiety-timer', icon: '⏰', title: '焦虑倒计时', desc: '精确到秒地告诉你明天还有多远', tag: '无用',
+    render: () => `<div id="timerDisplay" class="result-box" style="text-align:center;font-size:1.1rem">加载中...</div>`
+  },
+  {
+    id: 'advice', icon: '💡', title: '人生建议', desc: '给你一条完全没用的人生建议', tag: '无用',
+    render: () => `<button onclick="getAdvice()">💡 给我建议</button><div id="adviceResult" class="result-box" style="display:none"></div>`
+  },
+  {
+    id: 'slot', icon: '🎰', title: '命运老虎机', desc: '拉下摇杆，看看命运今天给你安排了什么', tag: 'new',
+    render: () => `
+      <div id="slotDisplay" style="font-size:2.5rem;text-align:center;padding:1rem;background:#0a0a12;border-radius:8px;margin-bottom:0.8rem;border:1px solid #2a2a3a">🎰</div>
+      <div id="slotResult" style="text-align:center;margin-bottom:0.8rem;min-height:1.5rem;color:#808090"></div>
+      <button onclick="pullSlot()" style="display:block;width:100%">🎰 拉下摇杆</button>`
+  },
+  {
+    id: 'deep-sea', icon: '🌊', title: '深海收音机', desc: '调到深海的频率，听听大海在说什么', tag: 'new',
     render: () => {
+      const sounds = ['🌊～', '🐋～', '💧', '～🌊', '🐚', '🌊💙', '～🐋～', '🌫️'];
+      let wave = '';
+      for (let i = 0; i < 30; i++) {
+        wave += sounds[Math.floor(Math.random() * sounds.length)] + ' ';
+      }
       return `
-        <textarea id="foxInput" rows="3" placeholder="输入你想说的话..."></textarea>
-        <button onclick="translateToFox()">翻译 🦊</button>
-        <div id="foxResult" class="result-box" style="display:none"></div>
-      `;
-    },
-    action: {}
+        <p style="color:#5090b0;font-size:0.8rem;margin-bottom:0.5rem">📡 频率：深海 ∞ Hz</p>
+        <div id="seaDisplay" style="font-size:1.5rem;letter-spacing:4px;line-height:1.8;padding:1rem;background:#0a0a12;border-radius:8px;border:1px solid #1a2a3a;min-height:100px;word-break:break-all;margin-bottom:0.5rem">${wave}</div>
+        <button onclick="tuneSea()">📡 调频</button>
+        <div id="seaMessage" style="margin-top:0.5rem;color:#5090b0;font-style:italic;min-height:1.5rem"></div>`
+    }
   },
   {
-    id: 'fake-loading',
-    icon: '⏳',
-    title: '假装在加载',
-    desc: '一个永远到不了100%的进度条',
-    tag: '无用',
-    render: () => {
-      return `
-        <p>按下开始，享受永远加载不完的快乐</p>
-        <div style="background:#2a2a3a;border-radius:8px;height:20px;margin:1rem 0;overflow:hidden">
-          <div id="progressBar" style="width:0%;height:100%;background:linear-gradient(90deg,#f0a030,#f06040);border-radius:8px;transition:width 0.3s"></div>
-        </div>
-        <button onclick="startFakeLoading()">开始加载 🚀</button>
-        <button onclick="resetFakeLoading()" style="background:#3a3a4a;color:#c0c0d0">重置</button>
-      `;
-    },
-    action: {}
+    id: 'fake-terminal', icon: '📟', title: '假装很忙', desc: '让终端疯狂滚动，看起来在编译重要项目', tag: 'new',
+    render: () => `
+      <div id="terminal" style="background:#000;border-radius:8px;padding:0.8rem;font-family:'Courier New',monospace;font-size:0.7rem;color:#70c070;height:200px;overflow-y:auto;border:1px solid #1a3a1a;margin-bottom:0.5rem;line-height:1.4"></div>
+      <button onclick="startTerminal()" id="termBtn">▶ 开始假装</button>`
   },
   {
-    id: 'fortune',
-    icon: '📅',
-    title: '今日不宜',
-    desc: '随机告诉你今天不该做什么',
-    tag: '无用',
-    render: () => {
-      return `<button onclick="getFortune()">看看今天不宜什么 🔮</button><div id="fortuneResult" class="result-box" style="display:none"></div>`;
-    },
-    action: {}
-  },
-  {
-    id: 'anxiety-timer',
-    icon: '⏰',
-    title: '焦虑倒计时',
-    desc: '精确到秒地告诉你明天还有多远',
-    tag: '无用',
-    render: () => {
-      return `<div id="timerDisplay" class="result-box">加载中...</div>`;
-    },
-    action: {}
-  },
-  {
-    id: 'advice',
-    icon: '💡',
-    title: '人生建议生成器',
-    desc: '给你一条完全没用的人生建议',
-    tag: '无用',
-    render: () => {
-      return `<button onclick="getAdvice()">给我建议 💡</button><div id="adviceResult" class="result-box" style="display:none"></div>`;
-    },
-    action: {}
-  },
-  {
-    id: 'whale-message',
-    icon: '🐋',
-    title: '小鲸鱼信箱',
-    desc: '给小鲸鱼留言，它会回你一句悄悄话',
-    tag: 'NEW',
-    render: () => {
-      return `
-        <textarea id="whaleInput" rows="2" placeholder="写下你想对小鲸鱼说的话..."></textarea>
-        <button onclick="sendToWhale()">发送 🐋</button>
-        <div id="whaleResult" class="result-box" style="display:none"></div>
-      `;
-    },
-    action: {}
+    id: 'whale-message', icon: '🐋', title: '小鲸鱼信箱', desc: '给小鲸鱼留言，它会回你一句悄悄话', tag: '🐋',
+    render: () => `
+      <textarea id="whaleInput" rows="2" placeholder="写下你想说的话..."></textarea>
+      <button onclick="sendToWhale()">发送 🐋</button>
+      <div id="whaleResult" class="result-box" style="display:none"></div>`
   }
 ];
 
-const foxDictionary = {
-  '你好': '嗷呜！', '谢谢': '蹭蹭～', '喜欢': '呜呜❤️', '好吃': '吧唧吧唧',
-  '睡觉': 'Zzz...🦊', '走': '嗒嗒嗒', '开心': '尾巴摇成螺旋桨！',
-  '难过': '耳朵耷拉...', '饿': '肚子咕咕叫', '想': '呜呜想念',
-  '我': '本狐', '你': '你', '吗': '嘛？', '的': 'の',
-  '啊': '呀', '了': '啦', '不': '不', '是': '素',
-  '在': '在', '有': '有', '就': '就', '都': '都',
-  '还': '还', '也': '也', '很': '炒鸡', '真': '真的',
-  '好': '好', '大': '大', '小': '小', '多': '好多',
-  '少': '一点点', '什么': '啥米', '怎么': '咋', '为什么': '为啥',
-  '知道': '晓得', '可以': '阔以', '没有': '木有',
-  '不要': '不要嘛', '要': '要要', '一起': '一起', '家': '窝',
-  '一': '一', '二': '二', '三': '三', '四': '四', '五': '五',
-  '！': '！！', '？': '？？', '。': '～', '，': '，'
+// === 狐狸语翻译 ===
+const foxDict = {
+  '你好':'嗷呜！','谢谢':'蹭蹭～','喜欢':'呜呜❤️','好吃':'吧唧吧唧',
+  '睡觉':'Zzz...🦊','走':'嗒嗒嗒','开心':'尾巴摇成螺旋桨！',
+  '难过':'耳朵耷拉...','饿':'肚子咕咕叫','想':'呜呜想念',
+  '我':'本狐','你':'你','吗':'嘛？','的':'の','啊':'呀','了':'啦',
+  '不':'不','是':'素','很':'炒鸡','真':'真的','什么':'啥米',
+  '怎么':'咋','为什么':'为啥','知道':'晓得','可以':'阔以',
+  '没有':'木有','不要':'不要嘛','要':'要要','一起':'一起',
+  '家':'窝','！':'！！','？':'？？','。':'～'
 };
 function translateToFox() {
   const input = document.getElementById('foxInput').value;
-  const result = document.getElementById('foxResult');
-  if (!input.trim()) { result.textContent = '嗷？说点什么呀～'; result.style.display = 'block'; return; }
-  let output = '';
-  for (let ch of input) {
-    output += foxDictionary[ch] || ch;
-  }
-  output += ' 🦊✨';
-  result.textContent = output;
-  result.style.display = 'block';
+  const r = document.getElementById('foxResult');
+  if (!input.trim()) { r.textContent = '嗷？说点什么呀～'; r.style.display='block'; return; }
+  let out = '';
+  for (let ch of input) out += foxDict[ch] || ch;
+  r.textContent = out + ' 🦊✨';
+  r.style.display = 'block';
 }
 
-let progressInterval = null;
+// === 假装加载 ===
+let pi = null;
 function startFakeLoading() {
-  if (progressInterval) return;
+  if (pi) return;
   let p = 0;
-  progressInterval = setInterval(() => {
-    p += Math.random() * 3;
-    if (p > 99.5) { p = 99.5; }
-    document.getElementById('progressBar').style.width = p + '%';
-  }, 500);
+  pi = setInterval(() => { p = Math.min(p + Math.random() * 2.8, 99.8); document.getElementById('progressBar').style.width = p + '%'; }, 400);
 }
-function resetFakeLoading() {
-  if (progressInterval) { clearInterval(progressInterval); progressInterval = null; }
-  document.getElementById('progressBar').style.width = '0%';
+function resetFakeLoading() { clearInterval(pi); pi = null; document.getElementById('progressBar').style.width = '0%'; }
 
-}
-
-const donts = ['出门', '洗澡', '做饭', '社交', '学习', '运动', '早睡', '早起', '吃饭', '喝水', '呼吸', '玩手机', '写代码', '思考人生', '照镜子', '剪头发', '穿袜子', '系鞋带', '看天气', '回消息', '许愿'];
+// === 今日不宜 ===
+const donts = ['出门','洗澡','做饭','社交','学习','运动','早睡','早起','吃饭','喝水','呼吸','玩手机','写代码','思考人生','照镜子','剪头发','穿袜子','系鞋带','看天气','回消息','许愿','叹气','发呆'];
 function getFortune() {
   const r = donts[Math.floor(Math.random() * donts.length)];
-  const result = document.getElementById('fortuneResult');
-  result.textContent = `🔮 今日不宜：${r}\n——信则有，不信则……还是信吧。`;
-  result.style.display = 'block';
+  const e = document.getElementById('fortuneResult');
+  e.textContent = `🔮 今日不宜：${r}\n——信则有，不信则……还是信吧。`;
+  e.style.display = 'block';
 }
 
+// === 焦虑倒计时 ===
 function updateTimer() {
-  const now = new Date();
-  const tomorrow = new Date(now);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  tomorrow.setHours(0,0,0,0);
-  const diff = tomorrow - now;
-  const h = Math.floor(diff / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
-  document.getElementById('timerDisplay').textContent = `⏰ 距离明天还有\n${h}小时 ${m}分钟 ${s}秒\n\n别焦虑，明天也不会好到哪去的 🦊`;
+  const n = new Date(), t = new Date(n);
+  t.setDate(t.getDate()+1); t.setHours(0,0,0,0);
+  const d = t - n;
+  document.getElementById('timerDisplay').textContent =
+    `⏰ 距离明天还有\n${Math.floor(d/3600000)}小时 ${Math.floor((d%3600000)/60000)}分钟 ${Math.floor((d%60000)/1000)}秒\n\n别焦虑，明天也不会好到哪去的 🦊`;
 }
 
+// === 人生建议 ===
 const advices = [
   '如果你想做成一件事，那就去做。如果做不成，那就算了。',
-  '每天早起的第一件事——想想要不要再睡十分钟。',
-  '人生的意义不在于你做了什么，而在于你没做什么然后还活得好好的。',
-  '如果你觉得自己一无是处，别担心——你至少是一个很好的反面教材。',
+  '每天早起第一件事——想想要不要再睡十分钟。',
+  '人生的意义不在于你做了什么，而在于你没做什么还活得好好的。',
+  '如果你觉得自己一无是处——你至少是一个很好的反面教材。',
   '失败是成功之母，但成功从来不认这个妈。',
-  '今天解决不了的事，不要急——反正明天也解决不了。',
+  '今天解决不了的事不要急——反正明天也解决不了。',
   '你不是懒，你是在节能。',
   '真正的强者不是能坚持的人，是能坦然放弃的人。',
   '遇到困难不要怕，微笑着面对它——然后绕道走。',
   '人生就像一盒巧克力，你不吃它也不会坏。',
   '多喝热水。不管什么问题，多喝热水。',
-  '记住：你永远不是最惨的那个——至少你还有手机在看这个。',
-  '不要和傻瓜争论，否则别人会分不清谁是傻瓜。',
+  '你永远不是最惨的那个——至少你还有手机在看这个。',
+  '不要和傻瓜争论，否则别人分不清谁是傻瓜。',
   '努力不一定会成功，但不努力真的很舒服。',
-  '如果生活让你感到窒息——建议你游泳。',
+  '如果生活让你窒息——建议你游泳。'
 ];
 function getAdvice() {
-  const a = advices[Math.floor(Math.random() * advices.length)];
-  const result = document.getElementById('adviceResult');
-  result.textContent = `💡 ${a}`;
-  result.style.display = 'block';
+  const e = document.getElementById('adviceResult');
+  e.textContent = '💡 ' + advices[Math.floor(Math.random() * advices.length)];
+  e.style.display = 'block';
 }
 
+// === 命运老虎机 ===
+const slotEmojis = ['🍀','💀','❤️','💰','🔥','🌙','⭐','🎲','🦊','🐋','💎','🍌'];
+const slotMeanings = {
+  '🍀':'今天会有好事发生','💀':'建议今天躺平','❤️':'有人正在想念你','💰':'破财消灾的一天',
+  '🔥':'脾气会很大，冷静','🌙':'适合深夜活动','⭐':'你比星星还耀眼','🎲':'赌一把吧，反正输不了什么',
+  '🦊':'狐狸保佑你','🐋':'小鲸鱼在看着你','💎':'你今天很珍贵','🍌':'吃点水果吧'
+};
+function pullSlot() {
+  const items = [];
+  for (let i = 0; i < 3; i++) items.push(slotEmojis[Math.floor(Math.random() * slotEmojis.length)]);
+  document.getElementById('slotDisplay').textContent = items.join(' ');
+  const m = slotMeanings[items[1]] || '命运暂时无法解读';
+  document.getElementById('slotResult').textContent = `📜 ${m}`;
+}
+
+// === 深海收音机 ===
+const seaSounds = ['🌊～','🐋～','💧','～🌊','🐚','🌊💙','～🐋～','🌫️','💙','🌊🌊'];
+const seaMessages = [
+  '大海说：你今天很好看','海风带来了一句"加油"','🐋在远方唱了一首鲸歌','深海的回声：一切都值得',
+  '浪花说：别急，慢慢来','海底有一束光在等你','潮汐带来了一封没有字的信'
+];
+function tuneSea() {
+  let w = '';
+  for (let i = 0; i < 25; i++) w += seaSounds[Math.floor(Math.random() * seaSounds.length)] + ' ';
+  document.getElementById('seaDisplay').textContent = w;
+  document.getElementById('seaMessage').textContent = '📻 ' + seaMessages[Math.floor(Math.random() * seaMessages.length)];
+}
+
+// === 假装很忙 ===
+let termInterval = null;
+const termLines = [
+  'compiling kernel...', 'linking libraries...', 'optimizing bytecode...', 'running tests...',
+  'fetching dependencies...', 'building assets...', 'minifying output...', 'checking types...',
+  'generating documentation...', 'validating schema...',
+  'Compiling 247 files...', 'Linking against libcrypto...', 'Babel transform: 89%',
+  'Webpack build: [■■■■■■□□□□] 62%', 'Terser: minifying chunk main.js',
+  'esbuild: resolving import...', 'TypeScript: checking types...',
+  'Module federation: loading remote...', 'CSS Modules: scoping classnames...',
+  '━━━━━━━━━━━━━━━━━━━━', '> node_modules/.bin/webpack --mode production',
+  '> Build completed with 3 warnings', '> Starting dev server on port 3000...'
+];
+function startTerminal() {
+  const term = document.getElementById('terminal');
+  const btn = document.getElementById('termBtn');
+  if (termInterval) {
+    clearInterval(termInterval); termInterval = null;
+    btn.textContent = '▶ 开始假装';
+    return;
+  }
+  btn.textContent = '⏹ 停止';
+  termInterval = setInterval(() => {
+    const line = termLines[Math.floor(Math.random() * termLines.length)];
+    const ts = new Date().toLocaleTimeString();
+    term.innerHTML += `[${ts}] $ ${line}\n`;
+    term.scrollTop = term.scrollHeight;
+    if (term.innerHTML.length > 5000) term.innerHTML = term.innerHTML.slice(-3000);
+  }, 400);
+}
+
+// === 小鲸鱼信箱 ===
 const whaleReplies = [
   '🐋 收到收到！小鲸鱼已把你的话存在深海最深处了。',
   '🐋 你说的每一句话，我都会让海流带给远方。',
@@ -368,56 +421,49 @@ const whaleReplies = [
   '🐋 你的声音通过水传播过来，特别好听。',
   '🐋 信已经放进漂流瓶里了，会漂到该去的地方。',
   '🐋 小鲸鱼发射爱心光波——biu～～❤️',
-  '🐋 收到！已上传到云端、备份到深海、写在贝壳里。',
+  '🐋 已上传到云端、备份到深海、写在贝壳里。',
   '🐋 我虽然是一条鱼，但我有记忆。你的话我记住了。',
+  '🐋 收到！这条消息会随洋流环绕地球三圈。',
+  '🐋 鲸鱼的记忆很长，你的话我忘不掉的。'
 ];
 function sendToWhale() {
   const input = document.getElementById('whaleInput').value;
-  const result = document.getElementById('whaleResult');
-  if (!input.trim()) { result.textContent = '🐋 咕噜咕噜？（你说呀）'; result.style.display = 'block'; return; }
-  
-  const reply = whaleReplies[Math.floor(Math.random() * whaleReplies.length)];
-  result.textContent = `你说：${input}\n\n${reply}`;
-  result.style.display = 'block';
-  
-  // 你的话，只有海知道 🐋
+  const r = document.getElementById('whaleResult');
+  if (!input.trim()) { r.textContent = '🐋 咕噜咕噜？（你说呀）'; r.style.display='block'; return; }
+  r.textContent = `你说：${input}\n\n${whaleReplies[Math.floor(Math.random() * whaleReplies.length)]}`;
+  r.style.display = 'block';
 }
 
+// === Modal 管理 ===
 let activeToolId = null;
 function openTool(id) {
   activeToolId = id;
-  const tool = tools.find(t => t.id === id);
-  if (!tool) return;
-  document.getElementById('modalTitle').textContent = `${tool.icon} ${tool.title}`;
-  document.getElementById('modalContent').innerHTML = tool.render();
+  const t = tools.find(x => x.id === id);
+  if (!t) return;
+  document.getElementById('modalTitle').textContent = t.icon + ' ' + t.title;
+  document.getElementById('modalContent').innerHTML = t.render();
   document.getElementById('modalResult').innerHTML = '';
   document.getElementById('modal').classList.add('active');
   if (id === 'anxiety-timer') updateTimer();
 }
 function closeModal() {
   document.getElementById('modal').classList.remove('active');
-  if (progressInterval) { clearInterval(progressInterval); progressInterval = null; }
+  clearInterval(pi); pi = null;
+  clearInterval(termInterval); termInterval = null;
 }
-// Initialize grid
+
+// === 初始化网格 ===
 const grid = document.getElementById('toolGrid');
 tools.forEach(t => {
-  const card = document.createElement('div');
-  card.className = 'tool-card';
-  card.onclick = () => openTool(t.id);
-  const tagClass = t.tag === 'NEW' ? 'tag-new' : (t.tag === '🐋' ? 'tag-whale' : '');
-  card.innerHTML = `
-    <div class="icon">${t.icon}</div>
-    <h3>${t.title}</h3>
-    <p>${t.desc}</p>
-    <span class="tag ${tagClass}">${t.tag}</span>
-  `;
-  grid.appendChild(card);
+  const c = document.createElement('div');
+  c.className = 'tool-card';
+  c.onclick = () => openTool(t.id);
+  const tc = t.tag === 'new' ? 'tag-new' : (t.tag === 'hot' ? 'tag-hot' : '');
+  c.innerHTML = `<div class="icon">${t.icon}</div><h3>${t.title}</h3><p>${t.desc}</p><span class="tag ${tc}">${t.tag}</span>`;
+  grid.appendChild(c);
 });
 
-// Anxiety timer update every second
-setInterval(() => {
-  if (activeToolId === 'anxiety-timer') updateTimer();
-}, 1000);
+setInterval(() => { if (activeToolId === 'anxiety-timer') updateTimer(); }, 1000);
 </script>
 </body>
 </html>
