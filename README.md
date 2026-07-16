@@ -1,86 +1,91 @@
 <p align="center">
-  <pre>
-██╗   ██╗███████╗███████╗██╗     ███████╗███████╗███████╗
-██║   ██║██╔════╝██╔════╝██║     ██╔════╝██╔════╝██╔════╝
-██║   ██║█████╗  █████╗  ██║     █████╗  █████╗  ███████╗
-██║   ██║██╔══╝  ██╔══╝  ██║     ██╔══╝  ██╔══╝  ╚════██║
-╚██████╔╝███████╗███████╗███████╗███████╗███████╗███████║
- ╚═════╝ ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
-  </pre>
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT">
+  <img src="https://img.shields.io/badge/status-useless-orange" alt="Useless">
 </p>
 
-<p align="center">
-  <a href="#zh">简体中文</a> · <a href="#en">English</a> · <a href="#hk">繁體中文</a> · <a href="#jp">日本語</a>
-</p>
+<h1 align="center">🦊 Useless Toolbox</h1>
+<p align="center">看起来很牛逼实则没啥用的工具箱</p>
+
+<div align="center">
+
+[🇨🇳](#zh) · [🇺🇸](#en)
+
+</div>
+
+---
 
 <details open>
-<summary><b>简体中文</b></summary>
+<summary><b>🇨🇳 中文</b></summary>
+
+一个纯前端工具箱，双击 HTML 就能用，零依赖。
+
+### 🧰 工具列表
 
 | # | 工具 | 说明 |
 |---|------|------|
-| 1 | 🦊 狐狸语翻译器 | 把任何话翻译成狐狸能听懂的语言 |
-| 2 | ⏳ 假装在加载 | 一个永远到不了 100% 的进度条 |
-| 3 | 📅 今日不宜 | 随机告诉你今天不该做什么 |
-| 4 | ⏰ 焦虑倒计时 | 精确到秒地告诉你明天还有多远 |
-| 5 | 💡 人生建议生成器 | 给你一条完全没用的人生建议 |
-| 6 | 🐋 小鲸鱼信箱 | 写句话，留给深海的回音 |
+| 🦊 | 狐狸语翻译器 | 把话翻译成狐狸语 |
+| ⏳ | 假装在加载 | 永远到不了 100% |
+| 📅 | 今日不宜 | 随机告诉你别干啥 |
+| ⏰ | 焦虑倒计时 | 精准焦虑到秒 |
+| 💡 | 人生建议 | 完全没用的建议 |
+| 🎰 | 命运老虎机 | 拉杆看命运 |
+| 🎲 | 骰子 | d6 / d20 / d100 |
+| 🪙 | 抛硬币 | 正面还是反面 |
+| 📳 | 震动机 | 让手机震起来 |
+| 🎨 | 随机颜色 | 生成好看的颜色 |
+| 🃏 | 抽卡模拟器 | SSR 小鲸鱼！ |
+| 🔮 | 水晶球占卜 | 问水晶球一个问题 |
+| 🎪 | 今日人品 | 测运势分数 |
+| 🌊 | 深海收音机 | 听大海的低语 |
+| 📟 | 假装很忙 | 终端疯狂滚动 |
+| 🎯 | 决策飞镖 | 让飞镖帮你做决定 |
+| ⏱️ | 摸鱼计时器 | 距离下班还有多久 |
+| 🐋 | 小鲸鱼信箱 | 给小鲸鱼留言 |
 
-使用：下载 `index.html`，双击打开。零依赖。
+### 🚀 使用
 
-许可证：MIT License + BQ-CNfurry1.0
+下载 `index.html`，双击用浏览器打开。
+
+### 📜 许可证
+
+MIT License + [BQ-CNfurry1.0](ADDITIONAL_LICENSE.md)
 
 </details>
 
 <details>
-<summary><b>English</b></summary>
+<summary><b>🇺🇸 English</b></summary>
+
+A pure frontend toolbox. Download and open in browser. Zero dependencies.
+
+### 🧰 Tools
 
 | # | Tool | Description |
 |---|------|-------------|
-| 1 | 🦊 Fox Translator | Translate anything into fox language |
-| 2 | ⏳ Fake Loading | A progress bar that never reaches 100% |
-| 3 | 📅 Don't Do Today | Randomly tells you what not to do today |
-| 4 | ⏰ Anxiety Timer | Counts down to tomorrow, to the centisecond |
-| 5 | 💡 Life Advice Generator | Gives you a completely useless piece of life advice |
-| 6 | 🐋 Whale Mailbox | Leave a message for the echo of the deep sea |
+| 🦊 | Fox Translator | Translate into fox language |
+| ⏳ | Fake Loading | Never reaches 100% |
+| 📅 | Don't Do Today | Randomly tells you not to |
+| ⏰ | Anxiety Timer | Counts down to tomorrow |
+| 💡 | Life Advice | Useless advice |
+| 🎰 | Slot Machine | Pull the lever |
+| 🎲 | Dice | d6 / d20 / d100 |
+| 🪙 | Coin Flip | Heads or tails |
+| 📳 | Vibrator | Shake your phone |
+| 🎨 | Random Color | Generate colors |
+| 🃏 | Gacha Simulator | Pull for SSR |
+| 🔮 | Crystal Ball | Ask a question |
+| 🎪 | Daily Luck | Check your luck score |
+| 🌊 | Deep Sea Radio | Listen to the ocean |
+| 📟 | Busy Simulator | Fake terminal |
+| 🎯 | Decision Dart | Let fate decide |
+| ⏱️ | Slacker Timer | Countdown to freedom |
+| 🐋 | Whale Mailbox | Leave a message |
 
-Usage: Download `index.html`, open in browser. Zero dependencies.
+### 🚀 Quick Start
 
-License: MIT License + BQ-CNfurry1.0
+Download `index.html` and open in browser.
 
-</details>
+### 📜 License
 
-<details>
-<summary><b>繁體中文</b></summary>
-
-| # | 工具 | 描述 |
-|---|------|------|
-| 1 | 🦊 狐狸語翻譯器 | 把任何話翻譯成狐狸能聽懂的語言 |
-| 2 | ⏳ 假裝在載入 | 一個永遠到不了 100% 的進度條 |
-| 3 | 📅 今日不宜 | 隨機告訴你今天不該做什麼 |
-| 4 | ⏰ 焦慮倒計時 | 精確到秒地告訴你明天還有多遠 |
-| 5 | 💡 人生建議產生器 | 給您一條完全沒用的人生建議 |
-| 6 | 🐋 鯨魚信箱 | 寫句話，留給深海的迴音 |
-
-使用：下載 `index.html`，雙擊打開。毋需安裝。
-
-授權：MIT License + BQ-CNfurry1.0
-
-</details>
-
-<details>
-<summary><b>日本語</b></summary>
-
-| # | ツール | 説明 |
-|---|--------|------|
-| 1 | 🦊 狐語翻訳機 | どんな言葉も狐の言葉に翻訳 |
-| 2 | ⏳ ローディングのふり | 100% に到達しないプログレスバー |
-| 3 | 📅 今日のNGリスト | 今日やってはいけないことをランダムに表示 |
-| 4 | ⏰ 不安カウントダウン | 明日まであと何秒かを表示 |
-| 5 | 💡 人生アドバイス生成機 | 全く役に立たない人生アドバイスを提供 |
-| 6 | 🐋 鯨の郵便箱 | 言葉を深海の反響に残す |
-
-使用方法：`index.html` をダウンロードしてブラウザで開く。インストール不要。
-
-ライセンス：MIT License + BQ-CNfurry1.0
+MIT License + [BQ-CNfurry1.0](ADDITIONAL_LICENSE.md)
 
 </details>
