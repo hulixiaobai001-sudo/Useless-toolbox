@@ -2,6 +2,32 @@
 
 ---
 
+---
+
+## 🦊 关于 BQ-CNfurry1.0 / About BQ-CNfurry1.0
+
+BQ-CNfurry1.0 是一个非正式、非经官方开源机构认可的补充性协议框架。它建立在 MIT、GPL-3.0 等既有开源协议之上，旨在为福瑞（Furry/兽人控）社区提供一个理想的代码交流环境。
+
+**其核心目标在于：**
+- 让「福瑞 + 代码」更好地被看见和传播
+- 在开源自由与社区文化保护之间取得平衡
+- 保护福瑞社区的文化特征不被歪曲或抹除
+- 以善意的倡议代替强制性的约束
+
+这是一份**意愿的表达，而非执行的武器**——它存在是为了邀请协作，而不是限制。
+
+BQ-CNfurry1.0 is an informal, non-ratified supplemental license framework. Built upon established licenses such as MIT and GPL-3.0, it aims to foster an ideal code-sharing environment for the Furry community.
+
+**Its core goals are:**
+- To make "Furry + Code" more visible and accessible
+- To balance open source freedom with community cultural preservation
+- To protect Furry community identity from distortion or erasure
+- To replace punitive enforcement with good-faith倡议
+
+This is **a statement of intent, not a weapon of enforcement** — it exists to invite collaboration, not to restrict it.
+
+---
+
 ## 📜 授权声明 / License Statement
 
 **作者 / Author：** 匿名 / Anonymous  
