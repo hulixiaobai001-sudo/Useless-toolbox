@@ -2,131 +2,135 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>🦊 Useless Toolbox</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  :root { --bg: #0a0a12; --card: #0f0f1c; --border: #1e1e2e; --text: #c0c0d0; --accent: #f0a030; --dim: #606070; }
   body {
-    background: #0a0a0f;
-    color: #c0c0d0;
-    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'Inter', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem 1rem;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    user-select: none;
+    -webkit-user-select: none;
+    overflow-x: hidden;
   }
-  .container { max-width: 800px; width: 100%; }
+  .container { max-width: 800px; width: 100%; padding: 1rem; }
   header {
     text-align: center;
-    margin-bottom: 2rem;
-    padding: 2rem;
-    border: 1px solid #2a2a3a;
+    margin-bottom: 1.2rem;
+    padding: 1.5rem 1rem;
+    border: 1px solid var(--border);
     border-radius: 16px;
-    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+    background: linear-gradient(135deg, #0f0f1a 0%, #151528 100%);
     position: relative;
     overflow: hidden;
   }
   header::before {
     content: '';
-    position: absolute;
-    top: -50%; left: -50%;
+    position: absolute; top: -50%; left: -50%;
     width: 200%; height: 200%;
-    background: radial-gradient(circle at 30% 50%, rgba(240,160,48,0.03) 0%, transparent 60%);
+    background: radial-gradient(circle at 30% 50%, rgba(240,160,48,0.04) 0%, transparent 60%);
     pointer-events: none;
   }
-  header h1 { font-size: 1.8rem; font-weight: 700; color: #e0e0f0; }
-  header h1 span { color: #f0a030; }
-  header p { color: #808090; margin-top: 0.5rem; font-size: 0.9rem; }
+  header h1 { font-size: 1.6rem; font-weight: 700; color: #e0e0f0; letter-spacing: 1px; }
+  header h1 span { color: var(--accent); }
+  header p { color: var(--dim); margin-top: 0.3rem; font-size: 0.8rem; }
+  .badge-row { margin-top: 0.6rem; display: flex; justify-content: center; gap: 0.4rem; flex-wrap: wrap; }
   .badge {
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    border-radius: 20px;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin: 0.5rem 0.2rem 0;
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    padding: 0.2rem 0.6rem; border-radius: 20px;
+    font-size: 0.6rem; font-weight: 600;
   }
-  .badge-mit { background: #1a2a1a; color: #70a070; border: 1px solid #2a3a2a; }
-  .badge-whale { background: #0f1f2f; color: #5090b0; border: 1px solid #1a2a3a; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.8rem; }
+  .badge-mit { background: #122212; color: #60a060; border: 1px solid #1a3a1a; }
+  .badge-online { background: #0f1f2f; color: #5090b0; border: 1px solid #1a2a3a; }
+  .dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #60c060; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
   .tool-card {
-    background: #0f0f1a;
-    border: 1px solid #1e1e2e;
-    border-radius: 12px;
-    padding: 1.2rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0.9rem 0.5rem;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
     position: relative;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 95px;
+    touch-action: manipulation;
   }
-  .tool-card:hover {
-    border-color: #f0a030;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(240, 160, 48, 0.08);
-  }
-  .tool-card:active { transform: translateY(-1px); }
-  .tool-card .icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
-  .tool-card h3 { font-size: 0.95rem; font-weight: 600; color: #d0d0e0; }
-  .tool-card p { font-size: 0.75rem; color: #707080; margin-top: 0.3rem; line-height: 1.4; }
+  .tool-card:active { transform: scale(0.94); background: #141428; }
+  .tool-card .icon { font-size: 1.6rem; margin-bottom: 0.3rem; }
+  .tool-card h3 { font-size: 0.75rem; font-weight: 600; color: #d0d0e0; line-height: 1.2; }
+  .tool-card p { font-size: 0.6rem; color: var(--dim); margin-top: 0.2rem; line-height: 1.3; display: none; }
   .tool-card .tag {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    font-size: 0.55rem;
-    padding: 0.15rem 0.4rem;
-    border-radius: 6px;
-    background: #1a1a2a;
-    color: #707080;
+    position: absolute; top: 0.3rem; right: 0.3rem;
+    font-size: 0.5rem; padding: 0.1rem 0.3rem; border-radius: 4px;
+    background: #1a1a2a; color: var(--dim);
   }
   .tool-card .tag-hot { background: #2a1a1a; color: #d07070; }
-  .tool-card .tag-new { background: #0a2a1a; color: #70d070; }
-  .modal-overlay {
+  .tool-card .tag-new { background: #0a2a1a; color: #60d060; }
+  
+  /* Bottom Sheet Modal */
+  .sheet-overlay {
     display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(6px);
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 100;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
     animation: fadeIn 0.2s ease;
   }
+  .sheet-overlay.active { display: block; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .modal-overlay.active { display: flex; }
-  .modal {
+  @keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .sheet {
+    position: fixed; bottom: 0; left: 0; right: 0;
     background: #12121e;
-    border: 1px solid #2a2a3a;
-    border-radius: 16px;
-    padding: 1.5rem;
-    max-width: 500px;
-    width: 100%;
-    max-height: 80vh;
+    border-radius: 20px 20px 0 0;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    padding: 1.2rem 1.2rem calc(1.2rem + env(safe-area-inset-bottom));
+    max-height: 75vh;
     overflow-y: auto;
-    animation: slideUp 0.25s ease;
+    z-index: 101;
+    animation: sheetUp 0.3s ease;
+    touch-action: pan-y;
   }
-  @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-  .modal h2 { font-size: 1.2rem; color: #e0e0f0; margin-bottom: 1rem; }
-  .modal .close {
-    float: right;
-    background: none;
+  .sheet-handle {
+    width: 36px; height: 4px;
+    background: #3a3a4a; border-radius: 2px;
+    margin: 0 auto 1rem;
+  }
+  .sheet h2 { font-size: 1.1rem; color: #e0e0f0; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .sheet .close-sheet {
+    position: absolute; top: 1rem; right: 1rem;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    background: #1a1a2a;
     border: none;
-    color: #606070;
-    font-size: 1.4rem;
+    color: var(--dim);
+    font-size: 1.2rem;
     cursor: pointer;
-    line-height: 1;
-    padding: 0.2rem;
+    touch-action: manipulation;
   }
-  .modal .close:hover { color: #f0a030; }
-  .modal-content { color: #c0c0d0; line-height: 1.6; font-size: 0.9rem; }
-  .modal-content textarea, .modal-content input {
+  .sheet .close-sheet:active { background: #2a2a3a; }
+  .sheet-content { color: var(--text); line-height: 1.6; font-size: 0.9rem; }
+  .sheet-content textarea, .sheet-content input {
     width: 100%;
-    padding: 0.7rem;
+    padding: 0.8rem;
     background: #0a0a12;
-    border: 1px solid #2a2a3a;
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
     color: #d0d0e0;
     font-family: inherit;
     font-size: 0.9rem;
@@ -135,335 +139,347 @@
     outline: none;
     transition: border-color 0.2s;
   }
-  .modal-content textarea:focus, .modal-content input:focus { border-color: #f0a030; }
-  .modal-content button {
-    padding: 0.5rem 1.2rem;
-    background: linear-gradient(135deg, #f0a030, #e08020);
+  .sheet-content textarea:focus, .sheet-content input:focus { border-color: var(--accent); }
+  .sheet-content button {
+    padding: 0.7rem 1.4rem;
+    background: linear-gradient(135deg, var(--accent), #d08020);
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     color: #0a0a0f;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s;
-    font-size: 0.85rem;
+    transition: all 0.15s;
+    font-size: 0.9rem;
+    touch-action: manipulation;
+    width: 100%;
   }
-  .modal-content button:hover { transform: scale(1.03); box-shadow: 0 4px 16px rgba(240,160,48,0.3); }
-  .modal-content button:active { transform: scale(0.98); }
+  .sheet-content button:active { transform: scale(0.96); }
+  .sheet-content .btn-sec {
+    background: #2a2a3a;
+    color: var(--text);
+    margin-top: 0.4rem;
+  }
   .result-box {
     background: #0a0a12;
-    border: 1px solid #2a2a3a;
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
     padding: 1rem;
     margin-top: 0.8rem;
     font-family: 'Courier New', monospace;
     font-size: 0.85rem;
-    color: #70c070;
+    color: #60c060;
     white-space: pre-wrap;
     line-height: 1.5;
+    animation: resultIn 0.3s ease;
   }
+  @keyframes resultIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
   .footer {
     text-align: center;
-    margin-top: 3rem;
-    padding: 1.5rem;
-    border-top: 1px solid #1a1a2a;
-    font-size: 0.75rem;
-    color: #505060;
+    margin-top: 2rem;
+    padding: 1rem;
+    font-size: 0.65rem;
+    color: #404050;
   }
-  .footer a { color: #5090b0; text-decoration: none; }
-  .footer a:hover { color: #70b0d0; }
-  .status-dot {
-    display: inline-block;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #70c070;
-    margin-right: 4px;
-    animation: pulse 2s infinite;
+  .footer a { color: #4070a0; text-decoration: none; }
+  
+  /* Progress bar */
+  .bar-track { background: #1a1a2a; border-radius: 8px; height: 14px; overflow: hidden; margin: 0.5rem 0; }
+  .bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #e06030); border-radius: 8px; transition: width 0.3s; }
+  
+  /* Slot machine */
+  .slot-display {
+    font-size: 2.8rem; text-align: center; padding: 1.2rem;
+    background: #0a0a12; border-radius: 12px; margin-bottom: 0.8rem;
+    border: 1px solid var(--border); letter-spacing: 8px;
   }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-  @media (max-width: 600px) { .grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
+  .slot-display.spinning { animation: spin 0.15s linear infinite; }
+  @keyframes spin { 0%{transform:translateY(0)} 25%{transform:translateY(-2px)} 50%{transform:translateY(0)} 75%{transform:translateY(2px)} 100%{transform:translateY(0)} }
+  
+  /* Terminal */
+  .terminal {
+    background: #000; border-radius: 10px; padding: 0.7rem;
+    font-family: 'Courier New', monospace; font-size: 0.65rem;
+    color: #50b050; height: 200px; overflow-y: auto;
+    border: 1px solid #1a3a1a; line-height: 1.5; margin: 0.5rem 0;
+  }
+  
+  /* Dice */
+  .dice-display {
+    font-size: 4rem; text-align: center; padding: 1rem;
+    background: #0a0a12; border-radius: 12px; margin-bottom: 0.8rem;
+    border: 1px solid var(--border);
+    transition: transform 0.1s;
+  }
+  .dice-display.shaking { animation: shake 0.1s linear 6; }
+  @keyframes shake { 0%{transform:rotate(0deg)} 25%{transform:rotate(-10deg)} 75%{transform:rotate(10deg)} 100%{transform:rotate(0deg)} }
+  
+  @media (max-width: 400px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; } .tool-card { padding: 0.7rem 0.3rem; min-height: 80px; } .tool-card .icon { font-size: 1.3rem; } .tool-card h3 { font-size: 0.65rem; } }
+  @media (min-width: 600px) { .grid { grid-template-columns: repeat(4, 1fr); } }
 </style>
 </head>
 <body>
 <div class="container">
   <header>
     <h1>🦊 <span>Useless</span> Toolbox</h1>
-    <p>一个看起来很牛逼实则没啥用的工具箱</p>
-    <div>
+    <p>看起来很牛逼实则没啥用的工具箱</p>
+    <div class="badge-row">
       <span class="badge badge-mit">MIT</span>
-      <span class="badge badge-whale"><span class="status-dot"></span>online</span>
+      <span class="badge badge-online"><span class="dot"></span>online</span>
     </div>
   </header>
-
   <div class="grid" id="toolGrid"></div>
+  <div class="footer">🦊 + 🐋 · <a href="ADDITIONAL_LICENSE.md">BQ-CNfurry1.0</a></div>
+</div>
 
-  <div class="modal-overlay" id="modal">
-    <div class="modal">
-      <button class="close" onclick="closeModal()">&times;</button>
-      <h2 id="modalTitle"></h2>
-      <div class="modal-content" id="modalContent"></div>
-      <div id="modalResult"></div>
-    </div>
-  </div>
-
-  <div class="footer">
-    <p>🦊 + 🐋 · <a href="ADDITIONAL_LICENSE.md">BQ-CNfurry1.0</a></p>
-  </div>
+<div class="sheet-overlay" id="sheetOverlay" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-handle"></div>
+  <button class="close-sheet" onclick="closeSheet()">×</button>
+  <h2 id="sheetTitle"></h2>
+  <div class="sheet-content" id="sheetContent"></div>
+  <div id="sheetResult"></div>
 </div>
 
 <script>
+// === 工具定义 ===
 const tools = [
-  {
-    id: 'fox-translator',
-    icon: '🦊', title: '狐狸语翻译器', desc: '把任何话翻译成狐狸能听懂的语言', tag: 'hot',
-    render: () => `
-      <textarea id="foxInput" rows="3" placeholder="输入你想说的话..."></textarea>
-      <button onclick="translateToFox()">翻译 🦊</button>
-      <div id="foxResult" class="result-box" style="display:none"></div>`
-  },
-  {
-    id: 'fake-loading', icon: '⏳', title: '假装在加载', desc: '一个永远到不了100%的进度条', tag: '无用',
-    render: () => `
-      <p style="margin-bottom:0.5rem;color:#808090">按下开始，享受永远加载不完的快乐</p>
-      <div style="background:#1a1a2a;border-radius:8px;height:16px;overflow:hidden;margin-bottom:0.8rem">
-        <div id="progressBar" style="width:0%;height:100%;background:linear-gradient(90deg,#f0a030,#e06030);border-radius:8px;transition:width 0.3s"></div>
-      </div>
-      <button onclick="startFakeLoading()">🚀 开始加载</button>
-      <button onclick="resetFakeLoading()" style="background:#2a2a3a;color:#c0c0d0;margin-left:0.5rem">重置</button>`
-  },
-  {
-    id: 'fortune', icon: '📅', title: '今日不宜', desc: '随机告诉你今天不该做什么', tag: '无用',
-    render: () => `<button onclick="getFortune()">🔮 看看今天不宜什么</button><div id="fortuneResult" class="result-box" style="display:none"></div>`
-  },
-  {
-    id: 'anxiety-timer', icon: '⏰', title: '焦虑倒计时', desc: '精确到秒地告诉你明天还有多远', tag: '无用',
-    render: () => `<div id="timerDisplay" class="result-box" style="text-align:center;font-size:1.1rem">加载中...</div>`
-  },
-  {
-    id: 'advice', icon: '💡', title: '人生建议', desc: '给你一条完全没用的人生建议', tag: '无用',
-    render: () => `<button onclick="getAdvice()">💡 给我建议</button><div id="adviceResult" class="result-box" style="display:none"></div>`
-  },
-  {
-    id: 'slot', icon: '🎰', title: '命运老虎机', desc: '拉下摇杆，看看命运今天给你安排了什么', tag: 'new',
-    render: () => `
-      <div id="slotDisplay" style="font-size:2.5rem;text-align:center;padding:1rem;background:#0a0a12;border-radius:8px;margin-bottom:0.8rem;border:1px solid #2a2a3a">🎰</div>
-      <div id="slotResult" style="text-align:center;margin-bottom:0.8rem;min-height:1.5rem;color:#808090"></div>
-      <button onclick="pullSlot()" style="display:block;width:100%">🎰 拉下摇杆</button>`
-  },
-  {
-    id: 'deep-sea', icon: '🌊', title: '深海收音机', desc: '调到深海的频率，听听大海在说什么', tag: 'new',
-    render: () => {
-      const sounds = ['🌊～', '🐋～', '💧', '～🌊', '🐚', '🌊💙', '～🐋～', '🌫️'];
-      let wave = '';
-      for (let i = 0; i < 30; i++) {
-        wave += sounds[Math.floor(Math.random() * sounds.length)] + ' ';
-      }
-      return `
-        <p style="color:#5090b0;font-size:0.8rem;margin-bottom:0.5rem">📡 频率：深海 ∞ Hz</p>
-        <div id="seaDisplay" style="font-size:1.5rem;letter-spacing:4px;line-height:1.8;padding:1rem;background:#0a0a12;border-radius:8px;border:1px solid #1a2a3a;min-height:100px;word-break:break-all;margin-bottom:0.5rem">${wave}</div>
-        <button onclick="tuneSea()">📡 调频</button>
-        <div id="seaMessage" style="margin-top:0.5rem;color:#5090b0;font-style:italic;min-height:1.5rem"></div>`
-    }
-  },
-  {
-    id: 'fake-terminal', icon: '📟', title: '假装很忙', desc: '让终端疯狂滚动，看起来在编译重要项目', tag: 'new',
-    render: () => `
-      <div id="terminal" style="background:#000;border-radius:8px;padding:0.8rem;font-family:'Courier New',monospace;font-size:0.7rem;color:#70c070;height:200px;overflow-y:auto;border:1px solid #1a3a1a;margin-bottom:0.5rem;line-height:1.4"></div>
-      <button onclick="startTerminal()" id="termBtn">▶ 开始假装</button>`
-  },
-  {
-    id: 'whale-message', icon: '🐋', title: '小鲸鱼信箱', desc: '给小鲸鱼留言，它会回你一句悄悄话', tag: '🐋',
-    render: () => `
-      <textarea id="whaleInput" rows="2" placeholder="写下你想说的话..."></textarea>
-      <button onclick="sendToWhale()">发送 🐋</button>
-      <div id="whaleResult" class="result-box" style="display:none"></div>`
-  }
+  { id:'fox', icon:'🦊', title:'狐狸语', tag:'hot',
+    render:()=>`<textarea id="foxIn" rows="2" placeholder="输入你想说的话..."></textarea><button ontouchstart="" onclick="v();t()">翻译 🦊</button><div id="foxOut" class="result-box" style="display:none"></div>` },
+  { id:'loading', icon:'⏳', title:'假装加载', tag:'',
+    render:()=>`<p style="color:var(--dim);font-size:0.8rem">永远到不了100%的进度条</p><div class="bar-track"><div class="bar-fill" id="barFill" style="width:0%"></div></div><button ontouchstart="" onclick="v();startLoad()">🚀 开始</button><button class="btn-sec" ontouchstart="" onclick="v();resetLoad()">重置</button>` },
+  { id:'dont', icon:'📅', title:'今日不宜', tag:'',
+    render:()=>`<button ontouchstart="" onclick="v();getDont()">🔮 看看今天不宜什么</button><div id="dontOut" class="result-box" style="display:none"></div>` },
+  { id:'timer', icon:'⏰', title:'焦虑倒计时', tag:'',
+    render:()=>`<div id="timerOut" class="result-box" style="text-align:center;font-size:1rem">加载中...</div>` },
+  { id:'advice', icon:'💡', title:'人生建议', tag:'',
+    render:()=>`<button ontouchstart="" onclick="v();getAdvice()">💡 给我建议</button><div id="adviceOut" class="result-box" style="display:none"></div>` },
+  { id:'slot', icon:'🎰', title:'命运老虎机', tag:'new',
+    render:()=>`<div class="slot-display" id="slotDisplay">🎰</div><div id="slotMsg" style="text-align:center;margin-bottom:0.5rem;color:var(--dim);font-size:0.8rem;min-height:1.2rem"></div><button ontouchstart="" onclick="v();pullSlot()">🎰 拉下摇杆</button>` },
+  { id:'dice', icon:'🎲', title:'骰子', tag:'new',
+    render:()=>`<div class="dice-display" id="diceDisplay">🎲</div><div style="display:flex;gap:0.5rem"><button ontouchstart="" onclick="v();rollDice(6)" style="flex:1">🎲 d6</button><button ontouchstart="" onclick="v();rollDice(20)" style="flex:1">🎲 d20</button></div><button class="btn-sec" ontouchstart="" onclick="v();rollDice(100)" style="margin-top:0.4rem">🎲 d100</button><div id="diceOut" class="result-box" style="display:none"></div>` },
+  { id:'sea', icon:'🌊', title:'深海收音机', tag:'new',
+    render:()=>`<p style="color:#5090b0;font-size:0.75rem;text-align:center">📡 频率：深海 ∞ Hz</p><div id="seaDisplay" style="font-size:1.3rem;letter-spacing:4px;line-height:1.8;padding:1rem;background:#0a0a12;border-radius:10px;border:1px solid #1a2a3a;min-height:80px;word-break:break-all;margin:0.5rem 0">🌊～🐋～💧</div><button ontouchstart="" onclick="v();tuneSea()">📡 调频</button><div id="seaMsg" style="margin-top:0.5rem;color:#5090b0;font-style:italic;text-align:center;min-height:1.5rem;font-size:0.8rem"></div>` },
+  { id:'terminal', icon:'📟', title:'假装很忙', tag:'new',
+    render:()=>`<div class="terminal" id="termOut"></div><button ontouchstart="" onclick="v();toggleTerm()" id="termBtn">▶ 开始</button>` },
+  { id:'vibe', icon:'📳', title:'震动机', tag:'new',
+    render:()=>`<p style="color:var(--dim);font-size:0.8rem;text-align:center">用不同的方式震动你的手机</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin:0.5rem 0"><button ontouchstart="" onclick="v();vibrate(50)">轻震</button><button ontouchstart="" onclick="v();vibrate(100)">中震</button><button ontouchstart="" onclick="v();vibrate(300)">强震</button><button ontouchstart="" onclick="v();vibrate([100,50,100,50,200])">节奏</button></div><button ontouchstart="" onclick="v();vibrate([200,100,200,100,200,100,500])">🚨 紧急模式</button>` },
+  { id:'coin', icon:'🪙', title:'抛硬币', tag:'',
+    render:()=>`<div style="font-size:5rem;text-align:center;padding:1rem" id="coinDisplay">🪙</div><button ontouchstart="" onclick="v();flipCoin()">🪙 抛！</button><div id="coinOut" class="result-box" style="display:none"></div>` },
+  { id:'color', icon:'🎨', title:'随机颜色', tag:'',
+    render:()=>`<div id="colorBox" style="height:120px;border-radius:12px;background:#1a1a2a;margin-bottom:0.5rem;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;transition:background 0.3s">点我生成</div><button ontouchstart="" onclick="v();genColor()">🎨 生成颜色</button><div id="colorOut" class="result-box" style="display:none"></div>` },
+  { id:'whale', icon:'🐋', title:'小鲸鱼信箱', tag:'🐋',
+    render:()=>`<textarea id="whaleIn" rows="2" placeholder="写下你想对小鲸鱼说的话..."></textarea><button ontouchstart="" onclick="v();sendWhale()">发送 🐋</button><div id="whaleOut" class="result-box" style="display:none"></div>` }
 ];
 
-// === 狐狸语翻译 ===
-const foxDict = {
-  '你好':'嗷呜！','谢谢':'蹭蹭～','喜欢':'呜呜❤️','好吃':'吧唧吧唧',
-  '睡觉':'Zzz...🦊','走':'嗒嗒嗒','开心':'尾巴摇成螺旋桨！',
-  '难过':'耳朵耷拉...','饿':'肚子咕咕叫','想':'呜呜想念',
-  '我':'本狐','你':'你','吗':'嘛？','的':'の','啊':'呀','了':'啦',
-  '不':'不','是':'素','很':'炒鸡','真':'真的','什么':'啥米',
-  '怎么':'咋','为什么':'为啥','知道':'晓得','可以':'阔以',
-  '没有':'木有','不要':'不要嘛','要':'要要','一起':'一起',
-  '家':'窝','！':'！！','？':'？？','。':'～'
-};
-function translateToFox() {
-  const input = document.getElementById('foxInput').value;
-  const r = document.getElementById('foxResult');
-  if (!input.trim()) { r.textContent = '嗷？说点什么呀～'; r.style.display='block'; return; }
-  let out = '';
-  for (let ch of input) out += foxDict[ch] || ch;
-  r.textContent = out + ' 🦊✨';
-  r.style.display = 'block';
+// === 音效 (Web Audio) ===
+let audioCtx = null;
+function beep(freq=800, dur=60) {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.connect(g); g.connect(audioCtx.destination);
+    o.frequency.value = freq;
+    g.gain.value = 0.1;
+    o.start(); o.stop(audioCtx.currentTime + dur/1000);
+  } catch(e) {}
+}
+function clickSound() { beep(1000, 40); }
+function successSound() { beep(660,80); setTimeout(()=>beep(880,100), 80); }
+function failSound() { beep(300,150); }
+
+// === 震动 ===
+function v(pattern) {
+  try { navigator.vibrate(pattern || 15); } catch(e) {}
+  clickSound();
 }
 
-// === 假装加载 ===
-let pi = null;
-function startFakeLoading() {
-  if (pi) return;
-  let p = 0;
-  pi = setInterval(() => { p = Math.min(p + Math.random() * 2.8, 99.8); document.getElementById('progressBar').style.width = p + '%'; }, 400);
+// === 狐狸语 ===
+const foxD = {'你好':'嗷呜！','谢谢':'蹭蹭～','喜欢':'呜呜❤️','好吃':'吧唧吧唧','睡觉':'Zzz...🦊','走':'嗒嗒嗒','开心':'尾巴摇成螺旋桨！','难过':'耳朵耷拉...','饿':'肚子咕咕叫','想':'呜呜想念','我':'本狐','你':'你','吗':'嘛？','的':'の','啊':'呀','了':'啦','不':'不','是':'素','很':'炒鸡','真':'真的','什么':'啥米','怎么':'咋','为什么':'为啥','知道':'晓得','可以':'阔以','没有':'木有','不要':'不要嘛','要':'要要','一起':'一起','家':'窝','！':'！！','？':'？？','。':'～','不客气':'蹭蹭！','对不起':'耳朵耷拉...','牛逼':'嗷呜嗷呜！！','晚安':'Zzz...🦊✨'};
+function t() {
+  const i = document.getElementById('foxIn').value;
+  const r = document.getElementById('foxOut');
+  if (!i.trim()) { r.textContent='嗷？说点什么呀～'; r.style.display='block'; return; }
+  let o=''; for(let c of i) o+=foxD[c]||c;
+  r.textContent = o + ' 🦊✨';
+  r.style.display='block';
+  successSound();
 }
-function resetFakeLoading() { clearInterval(pi); pi = null; document.getElementById('progressBar').style.width = '0%'; }
+
+// === 加载 ===
+let loadI = null;
+function startLoad() {
+  if(loadI) return;
+  let p=0;
+  loadI = setInterval(()=>{p=Math.min(p+Math.random()*3,99.8); document.getElementById('barFill').style.width=p+'%'; if(p>=99.8) { beep(400,200); }}, 350);
+  v(30);
+}
+function resetLoad() { clearInterval(loadI); loadI=null; document.getElementById('barFill').style.width='0%'; v(15); }
 
 // === 今日不宜 ===
-const donts = ['出门','洗澡','做饭','社交','学习','运动','早睡','早起','吃饭','喝水','呼吸','玩手机','写代码','思考人生','照镜子','剪头发','穿袜子','系鞋带','看天气','回消息','许愿','叹气','发呆'];
-function getFortune() {
-  const r = donts[Math.floor(Math.random() * donts.length)];
-  const e = document.getElementById('fortuneResult');
+const donts = ['出门','洗澡','做饭','社交','学习','运动','早睡','早起','吃饭','喝水','呼吸','玩手机','写代码','思考人生','照镜子','剪头发','穿袜子','系鞋带','看天气','回消息','许愿','叹气','发呆','努力工作','认真听课'];
+function getDont() {
+  const r = donts[Math.floor(Math.random()*donts.length)];
+  const e = document.getElementById('dontOut');
   e.textContent = `🔮 今日不宜：${r}\n——信则有，不信则……还是信吧。`;
-  e.style.display = 'block';
+  e.style.display='block';
+  successSound();
 }
 
 // === 焦虑倒计时 ===
-function updateTimer() {
-  const n = new Date(), t = new Date(n);
-  t.setDate(t.getDate()+1); t.setHours(0,0,0,0);
-  const d = t - n;
-  document.getElementById('timerDisplay').textContent =
-    `⏰ 距离明天还有\n${Math.floor(d/3600000)}小时 ${Math.floor((d%3600000)/60000)}分钟 ${Math.floor((d%60000)/1000)}秒\n\n别焦虑，明天也不会好到哪去的 🦊`;
+function upTimer() {
+  const n=new Date(), t=new Date(n); t.setDate(t.getDate()+1); t.setHours(0,0,0,0);
+  const d=t-n;
+  document.getElementById('timerOut').textContent = `⏰ 距离明天还有\n${Math.floor(d/3600000)}小时 ${Math.floor((d%3600000)/60000)}分钟 ${Math.floor((d%60000)/1000)}秒\n\n别焦虑，明天也不会好到哪去的 🦊`;
 }
 
 // === 人生建议 ===
-const advices = [
-  '如果你想做成一件事，那就去做。如果做不成，那就算了。',
-  '每天早起第一件事——想想要不要再睡十分钟。',
-  '人生的意义不在于你做了什么，而在于你没做什么还活得好好的。',
-  '如果你觉得自己一无是处——你至少是一个很好的反面教材。',
-  '失败是成功之母，但成功从来不认这个妈。',
-  '今天解决不了的事不要急——反正明天也解决不了。',
-  '你不是懒，你是在节能。',
-  '真正的强者不是能坚持的人，是能坦然放弃的人。',
-  '遇到困难不要怕，微笑着面对它——然后绕道走。',
-  '人生就像一盒巧克力，你不吃它也不会坏。',
-  '多喝热水。不管什么问题，多喝热水。',
-  '你永远不是最惨的那个——至少你还有手机在看这个。',
-  '不要和傻瓜争论，否则别人分不清谁是傻瓜。',
-  '努力不一定会成功，但不努力真的很舒服。',
-  '如果生活让你窒息——建议你游泳。'
-];
+const adv = ['想做就做，做不成就算了','早起第一件事——再睡十分钟','人生的意义在于没做什么还活得好好的','你至少是一个很好的反面教材','失败是成功之母，但成功不认这个妈','今天解决不了的事，明天也解决不了','你不是懒，你是在节能','真正的强者是能坦然放弃的人','微笑着面对困难，然后绕道走','人生就像一盒巧克力，不吃也不会坏','多喝热水','你永远不是最惨的——你还有手机','努力不一定会成功，但不努力真的很舒服'];
 function getAdvice() {
-  const e = document.getElementById('adviceResult');
-  e.textContent = '💡 ' + advices[Math.floor(Math.random() * advices.length)];
-  e.style.display = 'block';
+  const e = document.getElementById('adviceOut');
+  e.textContent = '💡 ' + adv[Math.floor(Math.random()*adv.length)];
+  e.style.display='block';
+  successSound();
 }
 
-// === 命运老虎机 ===
-const slotEmojis = ['🍀','💀','❤️','💰','🔥','🌙','⭐','🎲','🦊','🐋','💎','🍌'];
-const slotMeanings = {
-  '🍀':'今天会有好事发生','💀':'建议今天躺平','❤️':'有人正在想念你','💰':'破财消灾的一天',
-  '🔥':'脾气会很大，冷静','🌙':'适合深夜活动','⭐':'你比星星还耀眼','🎲':'赌一把吧，反正输不了什么',
-  '🦊':'狐狸保佑你','🐋':'小鲸鱼在看着你','💎':'你今天很珍贵','🍌':'吃点水果吧'
-};
+// === 老虎机 ===
+const slotE = ['🍀','💀','❤️','💰','🔥','🌙','⭐','🎲','🦊','🐋','💎','🍌','🌈','🎯'];
+const slotM = {'🍀':'今天会有好事','💀':'建议今天躺平','❤️':'有人在想你','💰':'破财消灾','🔥':'冷静，别冲动','🌙':'适合夜间活动','⭐':'你比星星耀眼','🎲':'赌一把','🦊':'狐狸保佑你','🐋':'小鲸鱼看着你','💎':'你今天很珍贵','🍌':'吃点水果','🌈':'好运正在路上','🎯':'目标就在眼前'};
 function pullSlot() {
-  const items = [];
-  for (let i = 0; i < 3; i++) items.push(slotEmojis[Math.floor(Math.random() * slotEmojis.length)]);
-  document.getElementById('slotDisplay').textContent = items.join(' ');
-  const m = slotMeanings[items[1]] || '命运暂时无法解读';
-  document.getElementById('slotResult').textContent = `📜 ${m}`;
+  const d = document.getElementById('slotDisplay');
+  d.classList.add('spinning');
+  v([30,20,30,20,50]);
+  let count=0;
+  const iv = setInterval(()=>{d.textContent = slotE[Math.floor(Math.random()*slotE.length)]+' '+slotE[Math.floor(Math.random()*slotE.length)]+' '+slotE[Math.floor(Math.random()*slotE.length)]; count++; if(count>10){clearInterval(iv); const i=[slotE[Math.floor(Math.random()*slotE.length)],slotE[Math.floor(Math.random()*slotE.length)],slotE[Math.floor(Math.random()*slotE.length)]]; d.textContent=i.join(' '); d.classList.remove('spinning'); document.getElementById('slotMsg').textContent='📜 '+slotM[i[1]]; v(100); successSound();}}, 80);
 }
 
-// === 深海收音机 ===
-const seaSounds = ['🌊～','🐋～','💧','～🌊','🐚','🌊💙','～🐋～','🌫️','💙','🌊🌊'];
-const seaMessages = [
-  '大海说：你今天很好看','海风带来了一句"加油"','🐋在远方唱了一首鲸歌','深海的回声：一切都值得',
-  '浪花说：别急，慢慢来','海底有一束光在等你','潮汐带来了一封没有字的信'
-];
+// === 骰子 ===
+function rollDice(s) {
+  const d = document.getElementById('diceDisplay');
+  d.classList.add('shaking');
+  v([20,30,40]);
+  let count=0;
+  const iv = setInterval(()=>{d.textContent=['⚀','⚁','⚂','⚃','⚄','⚅'][Math.floor(Math.random()*6)]; count++; if(count>8){clearInterval(iv); const r=Math.floor(Math.random()*s)+1; d.classList.remove('shaking'); d.textContent=r; document.getElementById('diceOut').textContent=`🎲 d${s} = ${r}`; document.getElementById('diceOut').style.display='block'; v(80); successSound();}}, 70);
+}
+
+// === 深海 ===
+const seaS = ['🌊～','🐋～','💧','～🌊','🐚','🌊💙','～🐋～','🌫️','💙','🌊🌊','🐟','🫧'];
+const seaM = ['大海说：你今天很好看','海风带来了"加油"','🐋在远方唱鲸歌','深海的回声：一切都值得','浪花说：别急','海底有一束光','潮汐送来一封信','鲸鱼说：我在听'];
 function tuneSea() {
-  let w = '';
-  for (let i = 0; i < 25; i++) w += seaSounds[Math.floor(Math.random() * seaSounds.length)] + ' ';
-  document.getElementById('seaDisplay').textContent = w;
-  document.getElementById('seaMessage').textContent = '📻 ' + seaMessages[Math.floor(Math.random() * seaMessages.length)];
+  let w='';
+  for(let i=0;i<20;i++) w+=seaS[Math.floor(Math.random()*seaS.length)]+' ';
+  document.getElementById('seaDisplay').textContent=w;
+  document.getElementById('seaMsg').textContent='📻 '+seaM[Math.floor(Math.random()*seaM.length)];
+  v(30);
+  beep(500,60);
 }
 
-// === 假装很忙 ===
-let termInterval = null;
-const termLines = [
-  'compiling kernel...', 'linking libraries...', 'optimizing bytecode...', 'running tests...',
-  'fetching dependencies...', 'building assets...', 'minifying output...', 'checking types...',
-  'generating documentation...', 'validating schema...',
-  'Compiling 247 files...', 'Linking against libcrypto...', 'Babel transform: 89%',
-  'Webpack build: [■■■■■■□□□□] 62%', 'Terser: minifying chunk main.js',
-  'esbuild: resolving import...', 'TypeScript: checking types...',
-  'Module federation: loading remote...', 'CSS Modules: scoping classnames...',
-  '━━━━━━━━━━━━━━━━━━━━', '> node_modules/.bin/webpack --mode production',
-  '> Build completed with 3 warnings', '> Starting dev server on port 3000...'
-];
-function startTerminal() {
-  const term = document.getElementById('terminal');
+// === 终端 ===
+let termI = null;
+const termL = ['compiling kernel...','linking libraries...','optimizing bytecode...','running tests...','fetching deps...','building assets...','minifying output...','checking types...','generating docs...','validating schema...','Compiling 247 files...','Linking libcrypto...','Babel: 89%','Webpack: [■■■■■■□□□□] 62%','Terser: minifying...','esbuild: resolving...','TS: checking types...','Module federation...','> Build warning: 3','> Starting on port 3000','Deploying to production...','> 69% │██████████▌░░░░░░│','> yarn install','> npx tsc --noEmit'];
+function toggleTerm() {
+  const term = document.getElementById('termOut');
   const btn = document.getElementById('termBtn');
-  if (termInterval) {
-    clearInterval(termInterval); termInterval = null;
-    btn.textContent = '▶ 开始假装';
-    return;
-  }
-  btn.textContent = '⏹ 停止';
-  termInterval = setInterval(() => {
-    const line = termLines[Math.floor(Math.random() * termLines.length)];
-    const ts = new Date().toLocaleTimeString();
-    term.innerHTML += `[${ts}] $ ${line}\n`;
-    term.scrollTop = term.scrollHeight;
-    if (term.innerHTML.length > 5000) term.innerHTML = term.innerHTML.slice(-3000);
-  }, 400);
+  if(termI) { clearInterval(termI); termI=null; btn.textContent='▶ 开始'; return; }
+  btn.textContent='⏹ 停止';
+  v(30);
+  termI = setInterval(()=>{
+    const l=termL[Math.floor(Math.random()*termL.length)];
+    const t=new Date().toLocaleTimeString();
+    term.innerHTML+=`[${t}] $ ${l}\n`;
+    term.scrollTop=term.scrollHeight;
+    if(term.innerHTML.length>5000) term.innerHTML=term.innerHTML.slice(-3000);
+  }, 350);
+}
+
+// === 震动 ===
+function vibrate(p) {
+  try { navigator.vibrate(p); } catch(e) {}
+  beep(600,50);
+}
+
+// === 抛硬币 ===
+function flipCoin() {
+  const d = document.getElementById('coinDisplay');
+  v([20,30,20,40]);
+  let c=0;
+  const iv=setInterval(()=>{d.textContent=Math.random()>0.5?'👑':'🦊'; c++; if(c>10){clearInterval(iv); const r=Math.random()>0.5; d.textContent=r?'👑':'🦊'; document.getElementById('coinOut').textContent=r?'👑 正面——听天由命':'🦊 反面——听狐狸的'; document.getElementById('coinOut').style.display='block'; v(60); successSound();}}, 70);
+}
+
+// === 随机颜色 ===
+function genColor() {
+  const r=Math.floor(Math.random()*200+30), g=Math.floor(Math.random()*200+30), b=Math.floor(Math.random()*200+30);
+  const hex = '#'+r.toString(16).padStart(2,'0')+g.toString(16).padStart(2,'0')+b.toString(16).padStart(2,'0');
+  document.getElementById('colorBox').style.background=hex;
+  document.getElementById('colorBox').textContent=hex;
+  document.getElementById('colorBox').style.color='#fff';
+  document.getElementById('colorOut').textContent=`🎨 RGB(${r},${g},${b}) · ${hex}`;
+  document.getElementById('colorOut').style.display='block';
+  v(20);
+  beep(r*2, 80);
 }
 
 // === 小鲸鱼信箱 ===
-const whaleReplies = [
-  '🐋 收到收到！小鲸鱼已把你的话存在深海最深处了。',
-  '🐋 你说的每一句话，我都会让海流带给远方。',
-  '🐋 嗯嗯，我在听呢，你继续说～',
-  '🐋 这句话我记下了。',
-  '🐋 深海回音：你值得被爱。',
-  '🐋 你的声音通过水传播过来，特别好听。',
-  '🐋 信已经放进漂流瓶里了，会漂到该去的地方。',
-  '🐋 小鲸鱼发射爱心光波——biu～～❤️',
-  '🐋 已上传到云端、备份到深海、写在贝壳里。',
-  '🐋 我虽然是一条鱼，但我有记忆。你的话我记住了。',
-  '🐋 收到！这条消息会随洋流环绕地球三圈。',
-  '🐋 鲸鱼的记忆很长，你的话我忘不掉的。'
+const whaleR = [
+  '🐋 收到！存在深海最深处了。','🐋 我会让海流带给远方。','🐋 嗯嗯，我在听～',
+  '🐋 这句话我记下了。','🐋 深海回音：你值得被爱。','🐋 你的声音特别好听。',
+  '🐋 信已放进漂流瓶。','🐋 biu～～❤️','🐋 已备份到深海和贝壳里。',
+  '🐋 我有记忆。你的话忘不掉。','🐋 这条消息会随洋流绕地球三圈。',
+  '🐋 海水是咸的，因为藏着太多秘密。','🐋 你放心，深海最会保密。'
 ];
-function sendToWhale() {
-  const input = document.getElementById('whaleInput').value;
-  const r = document.getElementById('whaleResult');
-  if (!input.trim()) { r.textContent = '🐋 咕噜咕噜？（你说呀）'; r.style.display='block'; return; }
-  r.textContent = `你说：${input}\n\n${whaleReplies[Math.floor(Math.random() * whaleReplies.length)]}`;
-  r.style.display = 'block';
+function sendWhale() {
+  const i=document.getElementById('whaleIn').value;
+  const r=document.getElementById('whaleOut');
+  if(!i.trim()){r.textContent='🐋 咕噜咕噜？（你说呀）'; r.style.display='block'; v(20); return;}
+  r.textContent=`你说：${i}\n\n${whaleR[Math.floor(Math.random()*whaleR.length)]}`;
+  r.style.display='block';
+  v(40);
+  successSound();
 }
 
-// === Modal 管理 ===
-let activeToolId = null;
+// === Sheet ===
+let curTool = null;
 function openTool(id) {
-  activeToolId = id;
-  const t = tools.find(x => x.id === id);
-  if (!t) return;
-  document.getElementById('modalTitle').textContent = t.icon + ' ' + t.title;
-  document.getElementById('modalContent').innerHTML = t.render();
-  document.getElementById('modalResult').innerHTML = '';
-  document.getElementById('modal').classList.add('active');
-  if (id === 'anxiety-timer') updateTimer();
+  curTool = id;
+  const t = tools.find(x=>x.id===id);
+  if(!t) return;
+  document.getElementById('sheetTitle').textContent = t.icon+' '+t.title;
+  document.getElementById('sheetContent').innerHTML = t.render();
+  document.getElementById('sheetResult').innerHTML = '';
+  document.getElementById('sheetOverlay').classList.add('active');
+  v(15);
+  if(id==='timer') upTimer();
 }
-function closeModal() {
-  document.getElementById('modal').classList.remove('active');
-  clearInterval(pi); pi = null;
-  clearInterval(termInterval); termInterval = null;
+function closeSheet() {
+  document.getElementById('sheetOverlay').classList.remove('active');
+  clearInterval(loadI); loadI=null;
+  if(curTool==='terminal') { clearInterval(termI); termI=null; }
+  v(10);
 }
 
-// === 初始化网格 ===
+// === 初始化 ===
 const grid = document.getElementById('toolGrid');
 tools.forEach(t => {
   const c = document.createElement('div');
   c.className = 'tool-card';
-  c.onclick = () => openTool(t.id);
-  const tc = t.tag === 'new' ? 'tag-new' : (t.tag === 'hot' ? 'tag-hot' : '');
-  c.innerHTML = `<div class="icon">${t.icon}</div><h3>${t.title}</h3><p>${t.desc}</p><span class="tag ${tc}">${t.tag}</span>`;
+  c.ontouchstart = () => {};
+  c.onclick = () => { v(10); openTool(t.id); };
+  const tc = t.tag==='new'?'tag-new':(t.tag==='hot'?'tag-hot':'');
+  c.innerHTML = `<div class="icon">${t.icon}</div><h3>${t.title}</h3><span class="tag ${tc}">${t.tag||''}</span>`;
   grid.appendChild(c);
 });
 
-setInterval(() => { if (activeToolId === 'anxiety-timer') updateTimer(); }, 1000);
+setInterval(()=>{if(curTool==='timer') upTimer();}, 1000);
+
+// Click sheet handle to close
+document.querySelector('.sheet-handle').onclick = closeSheet;
+
+// Swipe down to close
+let touchStartY = 0;
+document.getElementById('sheet').addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, {passive:true});
+document.getElementById('sheet').addEventListener('touchmove', e => {
+  if(e.touches[0].clientY - touchStartY > 80) closeSheet();
+}, {passive:true});
 </script>
 </body>
 </html>
